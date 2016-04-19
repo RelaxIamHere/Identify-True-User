@@ -244,7 +244,8 @@
                         <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
                         </li>
                         <li class="divider"></li>
-                        <li><i class="fa fa-sign-out fa-fw"></i><asp:LoginStatus ID="HeadLoginStatus" runat="server" LogoutAction="RedirectToLoginPage" LogoutText="Log Out" LogoutPageUrl="~/"/>
+                        <li>
+                            <asp:LoginStatus ID="HeadLoginStatus" runat="server" LogoutAction="RedirectToLoginPage" LogoutText="<i class='fa fa-sign-out fa-fw'></i> Log Out" LogoutPageUrl="~/"/>
                         </li>
                     </ul>
                     <!-- /.dropdown-user -->
