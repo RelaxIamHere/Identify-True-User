@@ -39,7 +39,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">LOGO ya da yazı</a>
+                <a class="navbar-brand" href="Default.aspx">LOGO ya da yazı</a>
             </div>
             <!-- /.navbar-header -->
 

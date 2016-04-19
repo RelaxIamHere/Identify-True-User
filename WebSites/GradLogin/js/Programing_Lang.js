@@ -2,7 +2,7 @@ var editor;
 
 function init(postBack) {
     editor = CodeMirror.fromTextArea(
-                document.getElementById('TextBoxCode'),
+                document.getElementById('MainContent_TextBoxCode'),
                     {
                         lineNumbers: true,
                         matchBrackets: true,
@@ -18,7 +18,7 @@ function init(postBack) {
 
 
 function fillSampleCode() {
-    var languages = document.getElementById("DropDownLanguage");
+    var languages = document.getElementById("MainContent_DropDownLanguage");
     var language = languages[languages.selectedIndex].text;
     setMode();
     if (language == "Ada (gnat 5.1.1)") {
@@ -485,7 +485,7 @@ process:-\n\
 
 
 function setMode() {
-    var languages = document.getElementById("DropDownLanguage");
+    var languages = document.getElementById("MainContent_DropDownLanguage");
     var language = languages[languages.selectedIndex].text;
 
     if (language == "Ada (gnat 5.1.1)") {

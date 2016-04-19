@@ -63,7 +63,7 @@ public partial class _Contest : System.Web.UI.Page
                             && status.Key != "input" && status.Key != "result" && status.Value != "" && status.Key != "output")
                             TextBoxCompiler.Text += status.Key + ": " + status.Value + "\n";
                         if (status.Key == "output")
-                            TextBoxOutput.Text = status.Key + ":\n" + status.Value;
+                            TextBoxOutput.Text =status.Value;
                         if (status.Key == "result")
                         {
                             TextBoxCompiler.Text += status.Key + ": ";

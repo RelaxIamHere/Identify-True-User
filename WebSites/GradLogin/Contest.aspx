@@ -3,16 +3,9 @@
 
 <asp:Content ID="HeaderContent" runat="server" ContentPlaceHolderID="HeadContent">
     <head>
-        <!--Code Mirror-->
-        <link href="js/codemirror-5.8/lib/codemirror.css" rel="stylesheet" type="text/css" />
-        <link href="js/codemirror-5.8/theme/ambiance.css" rel="stylesheet" type="text/css" />
-
-
-        <script src="js/codemirror-5.8/lib/codemirror.js" type="text/javascript"></script>
-        <script src="js/codemirror-5.8/mode/clike/clike.js" type="text/javascript"></script>
-        <script src="js/codemirror-5.8/addon/edit/matchbrackets.js" type="text/javascript"></script>
-      
-        <script src="js/Programing_Lang.js" type="text/javascript"></script>
+    <!--Code Mirror-->
+    <link href="js/codemirror-5.8/lib/codemirror.css" rel="stylesheet" type="text/css" />
+    <link href="js/codemirror-5.8/theme/ambiance.css" rel="stylesheet" type="text/css" />
     </head>
 </asp:Content>
 <asp:Content ID="BodyContent" runat="server" ContentPlaceHolderID="MainContent">
@@ -48,39 +41,46 @@
                         1 5 14 30 55<br />
                     </div>
                     <br />
-                    <div style="margin: 0 20px;">
+                    <div class="col-md-12">
                         <label for="comment">
                             Select Language:</label><br />
                         <asp:DropDownList ID="DropDownLanguage" class="btn btn-primary" runat="server">
-                        </asp:DropDownList>
+                        </asp:DropDownList><br /><br />
                     </div>
-                    <div style="margin: 0 20px;">
+                    <div class="col-md-12">
                         <label for="comment">
                             Code:</label><br />
                         <asp:TextBox ID="TextBoxCode" class="form-control" runat="server" TextMode="MultiLine"></asp:TextBox><br />
                     </div>
-                    <div>
-                        <div style="float: left; width: 50%; margin: 0 10px 0 20px; overflow: hidden;">
+                    <div class="col-md-12">
+                        <div class="col-md-6">
                             <label for="comment">
-                                Result:</label>
-                            <asp:TextBox ID="TextBoxCompiler" Style="font-size: 12px; height: 150px;" class="form-control"
+                                Result:</label><br />
+                            <asp:TextBox ID="TextBoxCompiler" Style="font-size: 12px; width: 100%; height: 150px;" class="form-control"
                                 runat="server" TextMode="MultiLine" Enabled="False"></asp:TextBox><br />
                         </div>
-                        <div style="overflow: hidden; margin: 0 20px 0 10px;">
+                        <div class="col-md-6">
                             <label for="comment">
-                                Output:</label>
-                            <asp:TextBox ID="TextBoxOutput" Style="font-size: 12px; height: 150px;" class="form-control"
+                                Output:</label><br />
+                            <asp:TextBox ID="TextBoxOutput" Style="font-size: 12px; width: 100%;  height: 150px;" class="form-control"
                                 runat="server" TextMode="MultiLine" Enabled="False"></asp:TextBox><br />
                         </div>
                     </div>
-                    <asp:Button Style="margin: 0 20px" ID="ButtonCompile" class="btn btn-primary" runat="server"
-                        OnClick="ButtonCompile_Click" Text="Compile" />
-                    <br />
-                    <br />
-                  
+                    <div class=col-md-12>
+                        <div class="col-md-6">
+                        <asp:Button ID="ButtonCompile" class="btn btn-primary" runat="server"
+                            OnClick="ButtonCompile_Click" Text="Compile" />
+                        <br />
+                        <br />
+                        </div>
+                  </div>
                 </div>
             </div>
             <!-- /#page-wrapper -->
         </div>
+    <script src="js/codemirror-5.8/lib/codemirror.js" type="text/javascript"></script>
+    <script src="js/codemirror-5.8/mode/clike/clike.js" type="text/javascript"></script>
+    <script src="js/codemirror-5.8/addon/edit/matchbrackets.js" type="text/javascript"></script>
+    <script src="js/Programing_Lang.js" type="text/javascript"></script>
     </body>
 </asp:Content>
