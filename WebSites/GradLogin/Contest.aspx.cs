@@ -38,9 +38,9 @@ public partial class _Contest : System.Web.UI.Page
         {
             var jss = new JavaScriptSerializer();
             string url = "http://api.compilers.sphere-engine.com/api/v3/submissions?access_token=" + token;
-            string code = TextBoxCode.Text;
-            var json = jss.Serialize(code);
-            string jsonData = "{\"language\":" + languageId[DropDownLanguage.SelectedIndex] + ",\"sourceCode\":" + json + ",\"input\":\"4 5\\r\"}";
+            var input = jss.Serialize(TextBoxInput.Text);
+            var code = jss.Serialize(TextBoxCode.Text);
+            string jsonData = "{\"language\":" + languageId[DropDownLanguage.SelectedIndex] + ",\"sourceCode\":" + code + ",\"input\":" + input + "}";
             client.Headers.Add("Content-Type", "application/json");
             response = client.UploadString(url, "POST", jsonData);
             var idObj = jss.Deserialize<Dictionary<string, string>>(response);
@@ -63,11 +63,11 @@ public partial class _Contest : System.Web.UI.Page
                             && status.Key != "input" && status.Key != "result" && status.Value != "" && status.Key != "output")
                             TextBoxCompiler.Text += status.Key + ": " + status.Value + "\n";
                         if (status.Key == "output")
-                            TextBoxOutput.Text =status.Value;
+                            TextBoxOutput.Text = status.Value;
                         if (status.Key == "result")
                         {
                             TextBoxCompiler.Text += status.Key + ": ";
-                            if(status.Value=="11")
+                            if (status.Value == "11")
                                 TextBoxCompiler.Text += "Compilation Error\n";
                             if (status.Value == "12")
                                 TextBoxCompiler.Text += "Runtime Error\n";
@@ -83,6 +83,10 @@ public partial class _Contest : System.Web.UI.Page
                                 TextBoxCompiler.Text += "Internal Error\n";
                         }
                     }
+                }
+                else
+                {
+                    //TODO run compile test etc... delay
                 }
             }
         }

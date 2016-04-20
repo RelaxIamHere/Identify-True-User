@@ -113,7 +113,6 @@ int main() {\n\
 		    sum += i*i;\n\
 		    printf("%lld\ ", sum);\n\
 	    }\n\
-        printf("\\n");\n\
 	}\n\
 	return 0;\n\
 }'

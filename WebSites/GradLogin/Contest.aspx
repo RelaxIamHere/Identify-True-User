@@ -22,25 +22,15 @@
                 </div>
                 <!-- /.row -->
                 <div class="row">
-                    
-                    <div style="width: 80%; border-left-color: #5bc0de; padding: 20px; margin: 0 auto;
-                        border: 1px solid #eee; border-left-width: 5px; border-radius: 3px;">
-                        <strong>Example challenge</strong></h3>
-                        <p>
-                            You are given some natural numbers as input. For each number n, the program should
-                            compute the sum 1<sup>2</sup> + 2<sup>2</sup> + 3<sup>2</sup> + … + n<sup>2</sup>,
-                            listing all partial sums and the global sum.
-                        </p>
-                        <br />
-                        <strong>Sample input:</strong><br />
-                        4 5<br />
-                        <br />
-                        <strong>Sample output:</strong>
-                        <br />
-                        1 5 14 30<br />
-                        1 5 14 30 55<br />
-                    </div>
-                    <br />
+                 <div class="col-md-12">
+                        <div class="col-md-3">
+                            <label for="comment">
+                                Input:</label><br />
+                            <asp:TextBox ID="TextBoxInput" Style="font-size: 12px; width: 100%; height: 150px;" class="form-control"
+                                runat="server" TextMode="MultiLine"></asp:TextBox><br />
+                        </div>
+                   </div>
+                    <br /><br />
                     <div class="col-md-12">
                         <label for="comment">
                             Select Language:</label><br />
