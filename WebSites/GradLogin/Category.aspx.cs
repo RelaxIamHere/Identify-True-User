@@ -40,7 +40,10 @@ public partial class _Category : System.Web.UI.Page
                         "</div>" +
                         "<div class=\"panel-body\">" +
                            "<button onclick=\"location.href=\'Challange.aspx?p="+row["Question"].ToString()+"'\" type=\"button\" class=\"btn btn-outline btn-info\" style=\"float:left\">Go to Question</button>" +
-                           "<h5 style=\"float:right; font-weight:bold\">"+score+"</h5>" +
+                           "<div style=\"float:right;\">"+
+                           "<button onclick=\"location.href=\'Leaderboard.aspx?p=" + row["Question"].ToString() + "'\" type=\"button\" class=\"btn btn-outline btn-info\">Leaderboard</button>" +
+                           "<h5 style=\"font-weight:bold\">"+score+"</h5>" +
+                           "</div>"+
                         "</div>" +
                     "</div>" +
                 "</div>";

@@ -23,7 +23,7 @@
                 <!-- /.row -->
                 <div class="row">
                  <div class="col-md-12">
-                        <div class="col-md-3">
+                        <div class="col-md-6">
                             <label for="comment">
                                 Input:</label><br />
                             <asp:TextBox ID="TextBoxInput" Style="font-size: 12px; width: 100%; height: 150px;" class="form-control"
