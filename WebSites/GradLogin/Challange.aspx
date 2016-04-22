@@ -80,10 +80,9 @@
                             <label for="comment">
                                 Score:</label><br />
                             <asp:TextBox ID="TextBoxScore" Style="font-size: 12px; width: 100%;  height: 150px;" class="form-control"
-                                runat="server" TextMode="MultiLine" Enabled="False"></asp:TextBox><br />
+                                runat="server" TextMode="MultiLine" Enabled="False"></asp:TextBox><br /><br /><br />
                         </div>
                     </div>
-                    
                 </div>
             </div>
             <!-- /#page-wrapper -->
