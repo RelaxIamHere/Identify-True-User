@@ -24,9 +24,11 @@
         <div id="wrapper">
             <div id="page-wrapper">
                 <div class="row">
-                <div style="right:0; position:absolute; overflow:hidden;">
+                    <div style="right:0; position:absolute; overflow:hidden;">
                     <br />
+                        <a href="Leaderboard.aspx?p=<%=Request.QueryString["p"]%>">
                             <div id="g1" style="height:100px; width:100px;"></div>
+                        </a>
                         </div>
                     <div style="width:75%; float:left">
                         <h2 class="page-header" id="header" runat="server">
