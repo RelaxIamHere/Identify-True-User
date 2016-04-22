@@ -18,6 +18,8 @@ public partial class _Default : System.Web.UI.Page
                 foreach (System.Data.DataRow row in dv.Table.Rows)
                     dropdownCategory.Items.Add(row["Category"].ToString());
                 dropdownCategory.SelectedIndex = 0;
+                if (!string.IsNullOrEmpty(Request.QueryString["c"]))
+                    dropdownCategory.SelectedIndex=dropdownCategory.Items.IndexOf(new ListItem(Request.QueryString["c"]));
             }
             else
             {
@@ -25,7 +27,7 @@ public partial class _Default : System.Web.UI.Page
                 CategoryDataSource.SelectParameters.Add("Question", Request.QueryString["p"]);
                 DataView dv = (DataView)CategoryDataSource.Select(new DataSourceSelectArguments());
                 if(dv.Table.Rows.Count>0)
-                    labelCategory.InnerHtml = "<a href='Leaderboard.aspx'>Category:</a> " + dv.Table.Rows[0]["Category"] + "<br />Question: " + dv.Table.Rows[0]["QuestionName"];
+                    labelCategory.InnerHtml = "Category: <a href='Leaderboard.aspx?c=" + dv.Table.Rows[0]["Category"] + "'>" + dv.Table.Rows[0]["Category"] + "</a> <br />Question: " + dv.Table.Rows[0]["QuestionName"];
                 else
                     labelCategory.InnerHtml = "Question Not Found";
             }
