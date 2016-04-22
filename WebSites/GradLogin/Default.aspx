@@ -4,7 +4,12 @@
 <asp:Content ID="HeaderContent" runat="server" ContentPlaceHolderID="HeadContent">
 </asp:Content>
 <asp:Content ID="BodyContent" runat="server" ContentPlaceHolderID="MainContent">
-
+<asp:SqlDataSource ID="ActivityDataSource" runat="server" 
+        ConnectionString="<%$ ConnectionStrings:ApplicationServices %>"  
+        SelectCommand="SELECT TOP 10 Submission.Date, Map.QuestionName, Map.Category, Submission.Score 
+        FROM Map INNER JOIN Submission ON Map.Question = Submission.Question
+        WHERE Submission.Username=@Username
+        ORDER BY Submission.Date DESC"></asp:SqlDataSource>
 <body>
 <div id="wrapper">
         <div id="page-wrapper">
@@ -100,24 +105,27 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                    <% ActivityDataSource.SelectParameters.Add("Username",Membership.GetUser().UserName); %>
+                                    <%  System.Data.DataView dv = (System.Data.DataView)ActivityDataSource.Select(new DataSourceSelectArguments());%>
+                                    <%   foreach (System.Data.DataRow row in dv.Table.Rows)
+                                         {%>
                                         <tr>
-                                            <td>Feb 15th 2015</td>
-                                            <td>Vindinium</td>
-                                            <td>Artificial Intelligence</td>
-                                            <td>30.0/50.0</td>
+                                            <%  string prefix = "";
+                                                int day = DateTime.Parse(row["Date"].ToString()).Day;
+                                                if (day.ToString().EndsWith("11")) prefix = "th";
+                                                if (day.ToString().EndsWith("12")) prefix = "th";
+                                                if (day.ToString().EndsWith("13")) prefix = "th";
+                                                if (day.ToString().EndsWith("1")) prefix = "st";
+                                                if (day.ToString().EndsWith("2")) prefix = "nd";
+                                                if (day.ToString().EndsWith("3")) prefix = "rd";
+                                                if (prefix == "") prefix = "th";
+                                             %>
+                                            <td><%=DateTime.Parse(row["Date"].ToString()).ToString("MMM dd")+prefix+DateTime.Parse(row["Date"].ToString()).ToString(" yyyy hh:mm")%></td>
+                                            <td><%=row["QuestionName"]%></td>
+                                            <td><%=row["Category"]%></td>
+                                            <td><%=row["Score"]%>/100</td>
                                         </tr>
-                                        <tr>
-                                            <td>Feb 14th 2015</td>
-                                            <td>Max Min</td>
-                                            <td>Algorithms</td>
-                                            <td>80.0/100.0</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Feb 13th 2015</td>
-                                            <td>Data Implementation</td>
-                                            <td>SQL</td>
-                                            <td>35.0/50.0</td>
-                                        </tr>
+                                        <% }%>          
                                     </tbody>
                                 </table>
                             </div>

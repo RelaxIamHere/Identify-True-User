@@ -23,6 +23,12 @@
 </head>
 <body>
     <form runat="server">
+        
+            <asp:SqlDataSource ID="MapDataSource" runat="server" 
+        ConnectionString="<%$ ConnectionStrings:ApplicationServices %>"  
+        SelectCommand="SELECT Distinct [Category] FROM [MAP] ORDER BY [Category] ASC"></asp:SqlDataSource>
+
+
                 <asp:LoginView ID="HeadLoginView" runat="server" EnableViewState="false">
                     <AnonymousTemplate>
                         [ <a href="~/Login.aspx" ID="HeadLoginStatus" runat="server">Log In</a> ]
@@ -274,20 +280,17 @@
                         <li>
                             <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Challenge Categories<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="Algorithms.aspx">Algorithms</a>
-                                </li>
-                                <li>
-                                    <a href="Ai.aspx">Artificial Intelligence</a>
-                                </li>
-                                <li>
-                                    <a href="Sql.aspx">SQL</a>
-                                </li>
-                            </ul>
+                                    
+                                   <%  System.Data.DataView dv = (System.Data.DataView)MapDataSource.Select(new DataSourceSelectArguments());%>
+                                   <%   foreach (System.Data.DataRow row in dv.Table.Rows) {%>
+                                        <li><a href="Category.aspx?c=<%= row["Category"] %>"><span><%= row["Category"] %></span></a></li> 
+                                   <%}%>
+
+                                </ul>
                             <!-- /.nav-second-level -->
                         </li>
                         <li>
-                            <a href="Contest.aspx"><i class="fa fa-clock-o fa-fw"></i> Contest</a>
+                            <a href="Compiler.aspx"><i class="fa fa-clock-o fa-fw"></i> Compiler</a>
                         </li>
                          <li>
                             <a href="Leaderboard.aspx"><i class="fa fa-trophy fa-fw"></i> Leaderboard</a>
