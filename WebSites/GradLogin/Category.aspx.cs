@@ -34,16 +34,16 @@ public partial class _Category : System.Web.UI.Page
                     score = "Score: "+dvSubmission.Table.Rows[0]["Score"].ToString()+"/100";
                 populate.InnerHtml +=
                     "<div class=\"col-lg-4\">" +
-                    "<div class=\"panel panel-info\">" +
+                    "<div class=\"panel panel-primary\">" +
                         "<div class=\"panel-heading\">" +
                             row["QuestionName"].ToString() +
                         "</div>" +
                         "<div class=\"panel-body\">" +
-                           "<button onclick=\"location.href=\'Challange.aspx?p="+row["Question"].ToString()+"'\" type=\"button\" class=\"btn btn-outline btn-info\" style=\"float:left\">Go to Question</button>" +
-                           "<div style=\"float:right;\">"+
-                           "<button onclick=\"location.href=\'Leaderboard.aspx?p=" + row["Question"].ToString() + "'\" type=\"button\" class=\"btn btn-outline btn-info\">Leaderboard</button>" +
-                           "<h5 style=\"font-weight:bold\">"+score+"</h5>" +
-                           "</div>"+
+                           "<button onclick=\"location.href=\'Challange.aspx?p=" + row["Question"].ToString() + "'\" type=\"button\" class=\"btn btn-primary\" style=\"float:right;\">Go to Question</button>" +
+                            "<h5 style=\"font-weight:bold\">" + score + "</h5>" +                        
+                           "</div>" +
+                        "<div class=\"panel-footer\" style=\"overflow:hidden;\">" +
+                            "<button onclick=\"location.href=\'Leaderboard.aspx?p=" + row["Question"].ToString() + "'\" type=\"button\" class=\"btn btn-outline btn-primary\">Leaderboard</button>" + 
                         "</div>" +
                     "</div>" +
                 "</div>";
