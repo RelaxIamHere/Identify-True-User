@@ -29,7 +29,7 @@ public partial class _Admin : System.Web.UI.Page
         string ctrlName = Page.Request.Params.Get("__EVENTTARGET");
         if (!String.IsNullOrEmpty(ctrlName) && ctrlName == "dropdownSize")
             DataPager1.PageSize = Convert.ToInt32(dropdownSize.Value);
-        else if (!String.IsNullOrEmpty(ctrlName) && ctrlName == "dropdownCategory" && !checkboxCategory.Checked)
+        else if (!String.IsNullOrEmpty(ctrlName) && ctrlName == "dropdownCategory" && checkboxCategory.Checked)
             textQcategory.Value = dropdownCategory.Value;
         else if (!String.IsNullOrEmpty(ctrlName) && ctrlName == "checkboxCategory")
         {
