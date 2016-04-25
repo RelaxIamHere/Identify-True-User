@@ -1,5 +1,5 @@
 ﻿<%@ Page Title="Home Page" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true"
-    CodeFile="Leaderboard.aspx.cs" Inherits="_Default" %>
+    CodeFile="Leaderboard.aspx.cs" Inherits="_Leaderboard" %>
 
 <asp:Content ID="HeaderContent" runat="server" ContentPlaceHolderID="HeadContent">
     <style type="text/css">
@@ -51,15 +51,16 @@
                                 <label id="labelCategory" runat="server"> Category <select onchange="javascript:__doPostBack('dropdownCategory','')" id="dropdownCategory" runat="server" class="form-control input-sm" aria-controls="dataTables-example" name="dataTables-example_length">
                                 </select> </label></div></div><div class="col-sm-6"><div class="dataTables_filter" id="dataTables-example_filter">
                                
-                                <div class="input-group">
-                                  <input id="search" runat="server" type="text" class="form-control" placeholder="Search for user" style="vertical-align: text-bottom;">
-                                  <ul style="float:right" class="pagination"><li aria-controls="dataTables-example" class="paginate_button active"><a  href="javascript:__doPostBack('searchButton','')" id="searchButton" style="cursor:pointer;">Search</a></li>
-                               </div>
+                                 <div class="input-group">
+                                    <span class="input-group-addon"><i runat="server" href="javascript:__doPostBack('searchButton','')" id="searchButton" class="fa fa-search fa-fw" aria-hidden="true"></i></span>
+                                    <input id="search" runat="server" class="form-control" type="text" placeholder="Search for Username"/>
+                                    <button style="display:none;"></button>   
+                                </div>
 
                                   </div></div></div><div class="row"><div class="col-sm-12">
                                         <table style="width: 100%;" aria-describedby="dataTables-example_info" role="grid" class="table table-striped table-bordered table-hover dataTable no-footer dtr-inline" id="dataTables-example" width="100%">
                                         <thead>
-                                            <tr role="row"><th aria-label="Rendering engine: activate to sort column descending" aria-sort="ascending" style="width: 231px;" colspan="1" rowspan="1" aria-controls="dataTables-example" tabindex="0" class="sorting_asc">Rank</th><th aria-label="Browser: activate to sort column ascending" style="width: 266px;" colspan="1" rowspan="1" aria-controls="dataTables-example" tabindex="0" class="sorting">User</th><th aria-label="Platform(s): activate to sort column ascending" style="width: 243px;" colspan="1" rowspan="1" aria-controls="dataTables-example" tabindex="0" class="sorting">Score</th></tr>
+                                            <tr role="row"><th style="width: 231px;" class="sorting_asc">Rank</th><th style="width: 266px;">User</th><th style="width: 243px;">Score</th></tr>
                                         </thead>
                                         <tbody>
                                         <asp:ListView ID="ListView1" runat="server" GroupItemCount="1" >
