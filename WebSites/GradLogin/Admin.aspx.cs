@@ -12,6 +12,7 @@ public partial class _Admin : System.Web.UI.Page
     {
         if (!Page.IsPostBack)
         {
+            checkboxCategory.Checked=true;
             DataView dv = (DataView)MapDataSource.Select(new DataSourceSelectArguments());
             foreach (System.Data.DataRow row in dv.Table.Rows)
                 dropdownCategory.Items.Add(row["Category"].ToString());
@@ -34,13 +35,13 @@ public partial class _Admin : System.Web.UI.Page
         {
             if (checkboxCategory.Checked)
             {
-                textQcategory.Disabled = false;
-                textQcategory.Value = "";
+                textQcategory.Disabled = true;
+                textQcategory.Value = dropdownCategory.Value;
             }
             else
             {
-                textQcategory.Disabled = true;
-                textQcategory.Value = dropdownCategory.Value;
+                textQcategory.Disabled = false;
+                textQcategory.Value = "";
             }
         }
         else if (!String.IsNullOrEmpty(ctrlName) && ctrlName == "buttonCreate")

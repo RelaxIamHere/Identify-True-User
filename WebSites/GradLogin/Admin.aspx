@@ -63,7 +63,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div><br />
                                         <div class="row">
                                             <div class="col-sm-12">
                                                 <table style="width: 100%;" aria-describedby="dataTables-example_info" role="grid"
@@ -97,7 +97,6 @@
                                                                         <span>
                                                                             <%# Eval("QuestionName") %></span>
                                                                     </td>
-                                                                    ,
                                                                     <td>
                                                                         <span><a class="btn btn-primary btn-block btn-outline" href="#"><i class="fa fa-pencil-square-o">
                                                                         </i></a></span>
@@ -180,7 +179,7 @@
                                         <div class="panel-footer" style="overflow: hidden;">
                                             <div class="input-group">
                                              <span class="input-group-addon">
-                                                    <label><input type="checkbox" id="checkboxCategory" runat="server" onchange="javascript:__doPostBack('checkboxCategory','')"> Category</label>
+                                                    <label><input type="checkbox" id="checkboxCategory" runat="server" onchange="javascript:__doPostBack('checkboxCategory','')"> Existing Category</label>
                                                 </span>
                                                 <input runat="server" id="textQcategory" class="form-control" type="text" disabled>
                                             </div>
