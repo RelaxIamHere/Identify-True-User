@@ -5,11 +5,19 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
+using System.Net;
+using System.Web.Script.Serialization;
+using System.IO;
 
 public partial class _Admin : System.Web.UI.Page
 {
+    private string token = "ff0c267afe82cc51624b466b14483fea2c4422ec";
+    private WebClient client = new WebClient();
+    private string response = "";
+
     protected void Page_Load(object sender, EventArgs e)
     {
+        labelMessage.InnerText = "";
         if (!Page.IsPostBack)
         {
             checkboxCategory.Checked=true;
@@ -47,24 +55,68 @@ public partial class _Admin : System.Web.UI.Page
         else if (!String.IsNullOrEmpty(ctrlName) && ctrlName == "buttonCreate")
         {
             if (textQcategory.Value != "" && textQcode.Value != "" && textQname.Value != "")
-            {
-                /*TODO 
-                 *  CALL API
-                 *  if (succes)
-                 *      CALL SQL
-                 *  return result
-                 *  if(result=succes)
-                 *      select category from dropdown (postback may required or refresh for category)
-                 */
-
-                labelMessage.InnerText = "result";
-            }
+                labelMessage.InnerText = createQuestion();
             else
                 labelMessage.InnerText = "Invalid or missing fields";
-
+        }
+        else if (!String.IsNullOrEmpty(ctrlName) && ctrlName == "delete")
+        {
+            string question = Request["__EVENTARGUMENT"];
+            QuestionDataSource.DeleteParameters.Clear();
+            QuestionDataSource.DeleteParameters.Add("Question",question);
+            QuestionDataSource.Delete();
+            if (DataPager1.TotalRowCount == 1)
+                dropdownCategory.Items.RemoveAt(dropdownCategory.SelectedIndex);
+            ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "DoPostBack", "__doPostBack('dropdownCategory','')", true);
         }
 
         int CurrentPage = ((DataPager1.StartRowIndex) / DataPager1.MaximumRows) + 1;
         recordCount.InnerHtml = "Showing " + (DataPager1.StartRowIndex+1) + " to " + (DataPager1.StartRowIndex + DataPager1.PageSize) + " of " + DataPager1.TotalRowCount + " entries";
     }
+
+    private string createQuestion()
+    {
+        var jss = new JavaScriptSerializer();
+        string url = "http://2d73b8c2.problems.sphere-engine.com/api/v3/problems?access_token=" + token;
+        string jsonData = "{\"code\":\""+textQcode.Value+ "\",\"name\":\""+textQname.Value+"\"}";
+        client.Headers.Add("Content-Type", "application/json");
+        try
+        {
+            response = client.UploadString(url, "POST", jsonData);
+            QuestionDataSource.InsertParameters.Clear();
+            QuestionDataSource.InsertParameters.Add("Category", textQcategory.Value);
+            QuestionDataSource.InsertParameters.Add("Question",textQcode.Value);
+            QuestionDataSource.InsertParameters.Add("QuestionName",textQname.Value);
+            QuestionDataSource.Insert();
+            if (!checkboxCategory.Checked)
+            {
+                DataView dv = (DataView)MapDataSource.Select(new DataSourceSelectArguments());
+                dropdownCategory.Items.Clear();
+                foreach (System.Data.DataRow row in dv.Table.Rows)
+                    dropdownCategory.Items.Add(row["Category"].ToString());
+                dropdownCategory.SelectedIndex = dropdownCategory.Items.IndexOf(new ListItem(textQcategory.Value));
+                checkboxCategory.Checked = true;
+                textQcategory.Disabled = true;
+                ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "DoPostBack", "__doPostBack('dropdownCategory','')", true);
+            }
+            ListView1.DataBind();
+            return "";
+        }
+        catch (WebException ex)
+        {
+            using (WebResponse response = ex.Response)
+            {
+                var httpResponse = (HttpWebResponse)response;
+
+                using (Stream data = response.GetResponseStream())
+                {
+                    StreamReader sr = new StreamReader(data);
+                    var resultObj = jss.Deserialize<Dictionary<string, dynamic>>(sr.ReadToEnd());
+                    return resultObj["message"];
+                }
+            }
+        }
+    }
+
+    
 }

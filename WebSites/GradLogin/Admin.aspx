@@ -15,7 +15,7 @@
     </asp:SqlDataSource>
     <asp:SqlDataSource ID="QuestionDataSource" runat="server" ConnectionString="<%$ ConnectionStrings:ApplicationServices %>"
         SelectCommand="SELECT [Question], [QuestionName] FROM [MAP] WHERE [Category]=@Category AND [QuestionName] LIKE @QuestionName ORDER BY [ID] DESC"
-        UpdateCommand="UPDATE [MAP] SET [QuestionName]=@QuestionName WHERE [Question]=@Question"
+        InsertCommand="INSERT INTO [MAP] ([Question],[QuestionName],[Category]) VALUES (@Question, @QuestionName, @Category)"
         DeleteCommand="DELETE FROM [MAP] WHERE [Question]=@Question"></asp:SqlDataSource>
     <body>
         <div id="wrapper">
@@ -97,12 +97,12 @@
                                                                         <span>
                                                                             <%# Eval("QuestionName") %></span>
                                                                     </td>
-                                                                    <td>
-                                                                        <span><a class="btn btn-primary btn-block btn-outline" href="#"><i class="fa fa-pencil-square-o">
+                                                                     <td>
+                                                                        <span><a class="btn btn-primary btn-block btn-outline" href="EditQuestion.aspx?p=<%#Eval("Question") %>"><i class="fa fa-pencil-square-o">
                                                                         </i></a></span>
                                                                     </td>
                                                                     <td>
-                                                                        <span><a class="btn btn-primary btn-block btn-outline" href="#"><i class="fa fa-remove">
+                                                                        <span><a class="btn btn-primary btn-block btn-outline" href="javascript:__doPostBack('delete','<%#Eval("Question")%>')"><i class="fa fa-remove">
                                                                         </i></a></span>
                                                                     </td>
                                                                 </tr>
@@ -117,11 +117,13 @@
                                                                         <span>
                                                                             <%# Eval("QuestionName") %></span>
                                                                     </td>
-                                                                    <td>
-                                                                        <span><a href="#" class="fa fa-pencil-square-o">Edit</a></span>
+                                                                     <td>
+                                                                        <span><a class="btn btn-primary btn-block btn-outline" href="EditQuestion.aspx?p=<%#Eval("Question") %>"><i class="fa fa-pencil-square-o">
+                                                                        </i></a></span>
                                                                     </td>
                                                                     <td>
-                                                                        <span><a href="#" class="fa fa-remove">Delete</a></span>
+                                                                        <span><a class="btn btn-primary btn-block btn-outline" href="javascript:__doPostBack('delete','<%#Eval("Question")%>')"><i class="fa fa-remove">
+                                                                        </i></a></span>
                                                                     </td>
                                                                 </tr>
                                                             </AlternatingItemTemplate>
