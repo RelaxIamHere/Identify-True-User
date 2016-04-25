@@ -57,7 +57,7 @@
                                     <button style="display:none;"></button>   
                                 </div>
 
-                                  </div></div></div><div class="row"><div class="col-sm-12">
+                                  </div></div></div><br /><div class="row"><div class="col-sm-12">
                                         <table style="width: 100%;" aria-describedby="dataTables-example_info" role="grid" class="table table-striped table-bordered table-hover dataTable no-footer dtr-inline" id="dataTables-example" width="100%">
                                         <thead>
                                             <tr role="row"><th style="width: 231px;" class="sorting_asc">Rank</th><th style="width: 266px;">User</th><th style="width: 243px;">Score</th></tr>
