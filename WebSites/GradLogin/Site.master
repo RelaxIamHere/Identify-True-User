@@ -249,6 +249,8 @@
                         </li>
                         <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
                         </li>
+                        <li><a href="Admin.aspx"><i class="fa fa-gears fa-fw"></i> Admin Panel</a>
+                        </li>
                         <li class="divider"></li>
                         <li>
                             <asp:LoginStatus ID="HeadLoginStatus" runat="server" LogoutAction="RedirectToLoginPage" LogoutText="<i class='fa fa-sign-out fa-fw'></i> Log Out" LogoutPageUrl="~/"/>
