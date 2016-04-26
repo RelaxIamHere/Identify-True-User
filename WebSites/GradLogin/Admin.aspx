@@ -180,14 +180,16 @@
                                         <!-- /.panel-heading -->
                                         <div class="panel-footer" style="overflow: hidden;">
                                             <div class="input-group">
-                                             <span class="input-group-addon">
                                                     <label><input type="checkbox" id="checkboxCategory" runat="server" onchange="javascript:__doPostBack('checkboxCategory','')"> Existing Category</label>
+                                            </div>
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i class="fa fa-gears fa-fw" aria-hidden="true"></i>
                                                 </span>
-                                                <input runat="server" id="textQcategory" class="form-control" type="text" disabled>
+                                                <input runat="server" id="textQcategory" class="form-control" type="text" placeholder="Type New Category" disabled>
                                             </div>
                                             <br />
                                             <div class="input-group">
-                                                <span class="input-group-addon"><i class="fa fa-gears fa-fw" aria-hidden="true"></i>
+                                                <span class="input-group-addon"><i class="fa fa-gear fa-fw" aria-hidden="true"></i>
                                                 </span>
                                                 <input runat="server" id="textQcode" class="form-control" type="text" placeholder="Question Code">
                                             </div>

@@ -106,8 +106,6 @@ public partial class _Admin : System.Web.UI.Page
         {
             using (WebResponse response = ex.Response)
             {
-                var httpResponse = (HttpWebResponse)response;
-
                 using (Stream data = response.GetResponseStream())
                 {
                     StreamReader sr = new StreamReader(data);
