@@ -7,7 +7,8 @@
 
     <asp:SqlDataSource ID="MapDataSource" runat="server" 
         ConnectionString="<%$ ConnectionStrings:ApplicationServices %>"  
-        SelectCommand="SELECT [Category] FROM [MAP] WHERE [Question]=@Question"></asp:SqlDataSource>
+        SelectCommand="SELECT [Category] FROM [MAP] WHERE [Question]=@Question"
+        UpdateCommand="UPDATE [MAP] SET [QuestionName]=@QuestionName WHERE [Question]=@Question"></asp:SqlDataSource>
 
     <body>
         <div id="wrapper">
@@ -17,27 +18,61 @@
                         <h2 class="page-header" id="header" runat="server">
                             Contest</h2>
                     </div>
-                
-
                 </div>
                 <!-- /.row -->
-
-                  <div runat="server" id="problem" style="width: 80%; border-left-color: #5bc0de; padding: 20px; margin: 0 auto;
-                        border: 1px solid #eee; border-left-width: 5px; border-radius: 3px;">
-                        
-                 </div>
-                 <br /><br />
-                 <div style="width: 80%; border-left-color: #5bc0de; padding: 20px; margin: 0 auto;
-                        border: 1px solid #eee; border-left-width: 5px; border-radius: 3px;">
-                        <h3><strong>Example Challange</strong></h3>
-                        <h3><strong id="Strong1" runat="server"></strong></h3>
-                        <p>SQL data implementasyon sorusu.</p><hr />
-                        <p><br /><strong>Sample input:</strong><br />1 3<br /><br />
-                        <strong>Sample output:</strong><br />4 5 6 7<br />1 3 6</p>
-                 </div>
-
+                <div class="row">
+                
+<div class="col-lg-12">
+<div class="col-lg-8">
+<center><label id="labelResult" runat=server visible=false></label></center>
+<div style="width:95%; border-left-color: #5bc0de; padding: 10px; margin: 0 auto; border: 1px solid #eee; border-left-width: 5px; border-radius: 3px;">
+<h3><strong><input id="qName" runat="server" class="form-control" type="text" placeholder="Question Name" /></strong></h3>
+<p><textarea id="qText1" runat="server" class="form-control" type="text" rows="4" placeholder="Question Text" /></p>
+<h4>Input</h4>
+<p><textarea id="qText2" runat="server" class="form-control" type="text" rows="4" placeholder="Input Description Text" /></p>
+<h4>Output</h4>
+<p><textarea id="qText3" runat="server" class="form-control" type="text" rows="4" placeholder="Output Description Text" /></p>
+<h4>Example</h4>
+<pre>
+<strong>Input:</strong>
+<p><textarea id="qText4" runat="server" class="form-control" type="text" rows="4" placeholder="Example Input" /></p>
+<strong>Output:</strong>
+<p><textarea id="qText5" runat="server" class="form-control" type="text" rows="4" placeholder="Example Output" /></p>
+</pre>
+<br />
+<button runat="server" id="buttonUpdate" onclick="javascript:__doPostBack('buttonUpdate','')" class="btn btn-primary btn-sm pull-right">
+Update Question
+</button>
+</div>
+<br /><br />
+</div>     
+                                <div class="col-lg-4">
+                                    <div class="chat-panel panel panel-default">
+                                        <div class="panel-heading">
+                                            <i class="fa fa-pencil fa-fw"></i>Edit TestCases
+                                        </div>
+                                        <!-- /.panel-heading -->
+                                        <div class="panel-footer" style="overflow: hidden;">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i class="fa fa-gears fa-fw" aria-hidden="true"></i>
+                                                </span>
+                                                <input runat="server" id="textQcategory" class="form-control" type="text" placeholder="Type New Category" disabled>
+                                            </div>
+                                            <br />
+                                            <label runat="server" id="labelMessage"></label>
+                                            <button runat="server" id="buttonCreate" onclick="javascript:__doPostBack('buttonCreate','')" class="btn btn-primary btn-sm pull-right">
+                                                    Create New Testcase
+                                                </button>
+                                        </div>
+                                        <!-- /.panel-footer -->
+                                    </div>
+                                    <!-- /.panel .chat-panel -->
+                                </div>
+                                <!-- /.col-lg-4 -->
+            </div><br /><br />
             </div>
-            <!-- /#page-wrapper -->
+            </div>
+            <!-- /#page-wrapper -->           
         </div>
     </body>
 </asp:Content>
