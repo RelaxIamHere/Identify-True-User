@@ -47,12 +47,29 @@ public partial class _EditQuestion : System.Web.UI.Page
                 url = "http://2d73b8c2.problems.sphere-engine.com/api/v3/problems/" + Request.QueryString["p"] + "/testcases?access_token=" + token;
                 response = client.DownloadString(url);
                 var testcaseObj = jss.Deserialize<Dictionary<string, dynamic>>(response);
+                table.InnerHtml="";
                 foreach (var testcase in testcaseObj["testcases"])
-                    index = 1;
+                {
+                    table.InnerHtml+=
+                    "<tr role=\"row\" class=\"gradeA odd\">"+
+                        "<td class=\"sorting_1\">"+
+                            testcase["number"]+
+                        "</td>"+
+                        "<td>"+
+                        "<center><input type=\"checkbox\" " + (testcase["active"] == true ? "checked=\"checked\"" : "") + " runat=\"server\" onchange=\"javascript:__doPostBack('checkChange','" + testcase["number"] + "')\"> </center> " +
+                        "</td>"+
+                        "<td>"+
+                            testcase["limits"]["time"]+" Second"+
+                        "</td>"+
+                        "<td>"+
+                            "<span><a class=\"btn btn-primary btn-block btn-outline\" href=\"javascript:__doPostBack('buttonTestEdit','" + testcase["number"] + "')\"><i class=\"fa fa-pencil-square-o\"></i></a></span>" +
+                        "</td>"+
+                   "</tr>";
+                }
             }
 
             string ctrlName = Page.Request.Params.Get("__EVENTTARGET");
-            if (!String.IsNullOrEmpty(ctrlName) && ctrlName == "buttonUpdate")
+            if (!String.IsNullOrEmpty(ctrlName) && (ctrlName == "buttonUpdate" || ctrlName == "checkChange" ))
             {
                 var jss = new JavaScriptSerializer();
                 string url = "http://2d73b8c2.problems.sphere-engine.com/api/v3/problems/" + Request.QueryString["p"] + "?access_token=" + token;
@@ -71,6 +88,14 @@ public partial class _EditQuestion : System.Web.UI.Page
             "</pre>";
 
                 string jsonData = "{\"name\":\"" + qName.Value + "\",\"body\":"+jss.Serialize(body)+"}";
+
+                /*
+                 * string activeList = "";
+                 * string jsonData = "{\"activeTestcases\":{" + activeList + "} }";
+                 * TODO GET ACTIVE LIST from checkboxes ?
+                 * TODO FLOAT SCORE for 87.5 etc.
+                 */
+
                 client.Headers.Add("Content-Type", "application/json");
                 try
                 {
@@ -79,7 +104,6 @@ public partial class _EditQuestion : System.Web.UI.Page
                     MapDataSource.UpdateParameters.Add("QuestionName",qName.Value);
                     MapDataSource.UpdateParameters.Add("Question", Request.QueryString["p"]);
                     MapDataSource.Update();
-                    Response.Redirect(Request.Url.ToString());
                 }
                 catch (WebException ex)
                 {
@@ -95,7 +119,70 @@ public partial class _EditQuestion : System.Web.UI.Page
                     }
                 }
             }
+            else if (!String.IsNullOrEmpty(ctrlName) && ctrlName == "buttonCreate")
+            {
+                var jss = new JavaScriptSerializer();
+                string url = "http://2d73b8c2.problems.sphere-engine.com/api/v3/problems/" + Request.QueryString["p"] + "/testcases?access_token=" + token;
+                client.Headers.Add("Content-Type", "application/json");
+                response = client.UploadString(url, "POST");
+                var numberObj = jss.Deserialize<Dictionary<string, dynamic>>(response);
+                table.InnerHtml +=
+                    "<tr role=\"row\" class=\"gradeA odd\">" +
+                        "<td class=\"sorting_1\">" +
+                            numberObj["number"] +
+                        "</td>" +
+                        "<td>" +
+                        "<center><input type=\"checkbox\" runat=\"server\" checked=\"checked\" onchange=\"javascript:__doPostBack('checkChange','" + numberObj["number"] + "')\"></center>" +
+                        "</td>" +
+                        "<td>" +
+                        "1 Second" +
+                        "</td>" +
+                        "<td>" +
+                            "<span><a class=\"btn btn-primary btn-block btn-outline\" href=\"javascript:__doPostBack('buttonTestEdit','" + numberObj["number"] + "')\"><i class=\"fa fa-pencil-square-o\"></i></a></span>" +
+                        "</td>" +
+                   "</tr>";
+            }
+            else if (!String.IsNullOrEmpty(ctrlName) && ctrlName == "buttonTestEdit")
+            {
+                var jss = new JavaScriptSerializer();
+                string testId=Page.Request.Params.Get("__EVENTARGUMENT");
+                
+                string url = "http://2d73b8c2.problems.sphere-engine.com/api/v3/problems/" + Request.QueryString["p"] + "/testcases/" + testId + "?access_token=" + token;
+                response = client.DownloadString(url);
+                var testcaseObj = jss.Deserialize<Dictionary<string, dynamic>>(response);
+                editTime.Value = testcaseObj["limits"]["time"];
+
+                editInput.Value = client.DownloadString(testcaseObj["input"]["url"] + "?access_token=" + token);
+                editOutput.Value = client.DownloadString(testcaseObj["output"]["url"] + "?access_token=" + token);
+               
+                labelIdTestcase.InnerText = " Test Case " + testId;
+                divTestcase.Visible = true;
+            }
+            else if (!String.IsNullOrEmpty(ctrlName) && ctrlName == "buttonApiUpdate")
+            {
+                var jss = new JavaScriptSerializer();
+                string testId = labelIdTestcase.InnerText.Split(' ')[3];
+                string url = "http://2d73b8c2.problems.sphere-engine.com/api/v3/problems/" + Request.QueryString["p"] + "/testcases/" + testId + "?access_token=" + token;
+                client.Headers.Add("Content-Type", "application/json");
+                string jsonData = "{\"input\":" + jss.Serialize(editInput.InnerText) + ",\"output\":" + jss.Serialize(editOutput.InnerText) + ",\"timelimit\":" + jss.Serialize(editTime.Value) + "}";
+                try
+                {
+                    response = client.UploadString(url, "PUT", jsonData);
+                    Response.Redirect(Request.RawUrl);
+                }
+                catch (WebException ex)
+                {
+                    using (WebResponse response = ex.Response)
+                    {
+                        using (Stream data = response.GetResponseStream())
+                        {
+                            StreamReader sr = new StreamReader(data);
+                            var resultObj = jss.Deserialize<Dictionary<string, dynamic>>(sr.ReadToEnd());
+                            labelUpdate.Visible = true;
+                            labelUpdate.InnerText = resultObj["message"];
+                        }
+                    }
+                }
+            }
         }
 }
-
-

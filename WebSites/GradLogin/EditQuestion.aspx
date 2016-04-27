@@ -39,32 +39,90 @@
 <strong>Output:</strong>
 <p><textarea id="qText5" runat="server" class="form-control" type="text" rows="4" placeholder="Example Output" /></p>
 </pre>
-<br />
 <button runat="server" id="buttonUpdate" onclick="javascript:__doPostBack('buttonUpdate','')" class="btn btn-primary btn-sm pull-right">
 Update Question
 </button>
-</div>
 <br /><br />
+</div>
+<br />
 </div>     
                                 <div class="col-lg-4">
+
+                                    <div class="chat-panel panel panel-default" id="divTestcase" runat="server" visible=false>
+                                        <div class="panel-heading">
+                                            <i class="fa fa-pencil fa-fw"></i> <label id="labelIdTestcase" runat="server"></label>
+                                        </div>
+                                        <!-- /.panel-heading -->
+                                        <div class="panel-footer" style="overflow: hidden;">
+                                            <div class="row">
+                                            <div class="col-sm-12">
+                                             <div class="input-group">
+                                                <span class="input-group-addon"><i class="fa fa-arrow-circle-right fa-fw" aria-hidden="true"></i>
+                                                </span>
+                                                <textarea id="editInput" runat="server" class="form-control" rows="3" type="text" placeholder="Input"></textarea>
+                                            </div><br />
+                                             <div class="input-group">
+                                                <span class="input-group-addon"><i class="fa fa-arrow-circle-left fa-fw" aria-hidden="true"></i>
+                                                </span>
+                                                <textarea id="editOutput" runat="server" class="form-control" rows="3" type="text" placeholder="Output"></textarea>
+                                            </div><br />
+                                             <div class="input-group">
+                                                <span class="input-group-addon"><i class="fa fa-clock-o fa-fw" aria-hidden="true"></i>
+                                                </span>
+                                                <input id="editTime" runat="server" class="form-control" type="text" placeholder="Time Limit (Seconds)">
+                                            </div><br />
+                                            <label runat="server" id="labelUpdate"></label>
+                                            <button runat="server" id="buttonApiUpdate" onclick="javascript:__doPostBack('buttonApiUpdate','')" class="btn btn-primary btn-sm pull-right">
+                                                Update Testcase
+                                            </button>
+                                            </div>
+                                        </div>
+                                        </div>
+                                        <!-- /.panel-footer -->
+                                    </div>
+
                                     <div class="chat-panel panel panel-default">
                                         <div class="panel-heading">
                                             <i class="fa fa-pencil fa-fw"></i>Edit TestCases
                                         </div>
                                         <!-- /.panel-heading -->
-                                        <div class="panel-footer" style="overflow: hidden;">
-                                            <div class="input-group">
-                                                <span class="input-group-addon"><i class="fa fa-gears fa-fw" aria-hidden="true"></i>
-                                                </span>
-                                                <input runat="server" id="textQcategory" class="form-control" type="text" placeholder="Type New Category" disabled>
+                                        <div class="panel-body" style="overflow: hidden; height:auto">
+                                            <div class="row">
+                                            <div class="col-sm-12">
+                                                <table style="width: 100%;" aria-describedby="dataTables-example_info" role="grid"
+                                                    class="table table-striped table-bordered table-hover dataTable no-footer dtr-inline"
+                                                    id="dataTables-example" width="100%">
+                                                    <thead>
+                                                        <tr role="row">
+                                                            <th style="width: 100px;">
+                                                                ID
+                                                            </th>
+                                                            <th style="width: 100px;">
+                                                                Active
+                                                            </th>
+                                                            <th style="width: 100px;">
+                                                                Time
+                                                            </th>
+                                                            <th style="width: 50px;">
+                                                                Edit
+                                                            </th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id="table" runat="server">
+                                                         
+                                                    </tbody>
+                                                </table>
+                                                
                                             </div>
-                                            <br />
-                                            <label runat="server" id="labelMessage"></label>
-                                            <button runat="server" id="buttonCreate" onclick="javascript:__doPostBack('buttonCreate','')" class="btn btn-primary btn-sm pull-right">
-                                                    Create New Testcase
-                                                </button>
                                         </div>
-                                        <!-- /.panel-footer -->
+                                        </div>
+                                        <!-- /.panel-body -->
+                                        <div class="panel-footer" style="overflow:hidden">
+                                            <label runat="server" id="labelCreate"></label>
+                                            <button runat="server" id="buttonCreate" onclick="javascript:__doPostBack('buttonCreate','')" class="btn btn-primary btn-sm pull-right">
+                                                Create New Testcase
+                                            </button>
+                                        </div>
                                     </div>
                                     <!-- /.panel .chat-panel -->
                                 </div>
