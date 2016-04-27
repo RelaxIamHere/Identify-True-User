@@ -152,6 +152,7 @@ public partial class _Challange : System.Web.UI.Page
                         SubmissionDataSource.UpdateParameters.Add("Question", Request.QueryString["p"]);
                         SubmissionDataSource.UpdateParameters.Add("Username", Membership.GetUser().UserName);
                         SubmissionDataSource.UpdateParameters.Add("Date", DateTime.Now.ToString());
+                        SubmissionDataSource.UpdateParameters.Add("Language", DropDownLanguage.Items[resultObj["language"]-1].Text);
                         SubmissionDataSource.Update();
                     }
                     else //Insert
@@ -162,6 +163,7 @@ public partial class _Challange : System.Web.UI.Page
                         SubmissionDataSource.InsertParameters.Add("Question", Request.QueryString["p"]);
                         SubmissionDataSource.InsertParameters.Add("Username", Membership.GetUser().UserName);
                         SubmissionDataSource.InsertParameters.Add("Date", DateTime.Now.ToString());
+                        SubmissionDataSource.InsertParameters.Add("Language", DropDownLanguage.Items[resultObj["language"]-1].Text);
                         SubmissionDataSource.Insert();
                     }
                 }

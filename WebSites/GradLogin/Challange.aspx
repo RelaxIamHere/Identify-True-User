@@ -13,8 +13,8 @@
     <asp:SqlDataSource ID="SubmissionDataSource" runat="server" 
         ConnectionString="<%$ ConnectionStrings:ApplicationServices %>" 
         SelectCommand="SELECT [SubmissionId],[Score] FROM [Submission] WHERE [Username]=@Username AND [Question]=@Question"
-        UpdateCommand="UPDATE [Submission] SET [Score]=@Score,[SubmissionId]=@SubmissionId, [Date]=@Date WHERE [Username]=@Username AND [Question]=@Question"
-        InsertCommand="INSERT INTO [Submission] ([Username],[Question],[Score],[SubmissionId],[Date]) VALUES (@Username,@Question,@Score,@SubmissionId,@Date)"></asp:SqlDataSource>
+        UpdateCommand="UPDATE [Submission] SET [Language]=@Language, [Score]=@Score,[SubmissionId]=@SubmissionId, [Date]=@Date WHERE [Username]=@Username AND [Question]=@Question"
+        InsertCommand="INSERT INTO [Submission] ([Username],[Question],[Score],[SubmissionId],[Date],[Language]) VALUES (@Username,@Question,@Score,@SubmissionId,@Date,@Language)"></asp:SqlDataSource>
     
     <asp:SqlDataSource ID="MapDataSource" runat="server" 
         ConnectionString="<%$ ConnectionStrings:ApplicationServices %>"  

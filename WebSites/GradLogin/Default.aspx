@@ -6,7 +6,7 @@
 <asp:Content ID="BodyContent" runat="server" ContentPlaceHolderID="MainContent">
 <asp:SqlDataSource ID="ActivityDataSource" runat="server" 
         ConnectionString="<%$ ConnectionStrings:ApplicationServices %>"  
-        SelectCommand="SELECT TOP 10 Submission.Date, Map.QuestionName, Map.Category, Submission.Score 
+        SelectCommand="SELECT TOP 10 Submission.Language, Submission.Date, Map.QuestionName, Map.Category, Submission.Score 
         FROM Map INNER JOIN Submission ON Map.Question = Submission.Question
         WHERE Submission.Username=@Username
         ORDER BY Submission.Date DESC"></asp:SqlDataSource>
@@ -101,6 +101,7 @@
                                             <th>Date</th>
                                             <th>Challenge</th>
                                             <th>Category</th>
+                                            <th>Language</th>
                                             <th>Score</th>
                                         </tr>
                                     </thead>
@@ -123,6 +124,7 @@
                                             <td><%=DateTime.Parse(row["Date"].ToString()).ToString("MMM dd")+prefix+DateTime.Parse(row["Date"].ToString()).ToString(" yyyy hh:mm")%></td>
                                             <td><%=row["QuestionName"]%></td>
                                             <td><%=row["Category"]%></td>
+                                            <td><%=row["Language"]%></td>
                                             <td><%=row["Score"]%>/100</td>
                                         </tr>
                                         <% }%>          
