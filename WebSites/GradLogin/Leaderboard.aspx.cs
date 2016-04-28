@@ -39,7 +39,7 @@ public partial class _Leaderboard : System.Web.UI.Page
         else
         {
             LeaderDataSource.SelectCommand =
-                "SELECT* FROM ( SELECT ROW_NUMBER() OVER( ORDER BY Submission.Score DESC) AS Rank, Submission.Username AS Username, Submission.Score AS Score " +
+                "SELECT* FROM ( SELECT ROW_NUMBER() OVER( ORDER BY Submission.Score DESC) AS Rank, Submission.Language AS Language, Submission.Username AS Username, Submission.Score AS Score " +
                         "FROM Map INNER JOIN Submission ON Map.Question = Submission.Question " +
                         "WHERE (Map.Question = @Question)) a " +
                     "WHERE a.Username LIKE @Username";
