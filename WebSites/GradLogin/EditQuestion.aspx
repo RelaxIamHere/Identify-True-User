@@ -9,7 +9,6 @@
         ConnectionString="<%$ ConnectionStrings:ApplicationServices %>"  
         SelectCommand="SELECT [Category] FROM [MAP] WHERE [Question]=@Question"
         UpdateCommand="UPDATE [MAP] SET [QuestionName]=@QuestionName WHERE [Question]=@Question"></asp:SqlDataSource>
-
     <body>
         <div id="wrapper">
             <div id="page-wrapper">
@@ -39,7 +38,7 @@
 <strong>Output:</strong>
 <p><textarea id="qText5" runat="server" class="form-control" type="text" rows="4" placeholder="Example Output" /></p>
 </pre>
-<button runat="server" id="buttonUpdate" onclick="javascript:__doPostBack('buttonUpdate','')" class="btn btn-primary btn-sm pull-right">
+<button runat="server" id="buttonUpdate" onclick="javascript:updateActive()" class="btn btn-primary btn-sm pull-right">
 Update Question
 </button>
 <br /><br />
@@ -91,7 +90,7 @@ Update Question
                                             <div class="col-sm-12">
                                                 <table style="width: 100%;" aria-describedby="dataTables-example_info" role="grid"
                                                     class="table table-striped table-bordered table-hover dataTable no-footer dtr-inline"
-                                                    id="dataTables-example" width="100%">
+                                                    id="dataTables" width="100%">
                                                     <thead>
                                                         <tr role="row">
                                                             <th style="width: 100px;">
@@ -133,4 +132,17 @@ Update Question
             <!-- /#page-wrapper -->           
         </div>
     </body>
+    <script type="text/javascript">
+        function updateActive() {
+           var counter=0;
+           var list= [];
+           $("#dataTables > tbody > tr > td >center > input").each(function(){
+                if ($(this).prop('checked') == true)
+                 list.push(counter);
+                 counter++;
+             });
+             document.cookie="activeTest="+list;
+             __doPostBack('buttonUpdate', '');
+        }
+    </script>
 </asp:Content>
