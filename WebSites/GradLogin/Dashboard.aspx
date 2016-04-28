@@ -164,48 +164,59 @@
                         </div>
                         <!-- /.panel-body -->
                     </div>
-
-                    <!-- Score DELETED -->
-
                 </div>
                 <!-- /.col-lg-8 -->
                 <div class="col-lg-4">
                 <div class="chat-panel panel panel-default">
-                                        <div class="panel-heading">
-                                            <i class="fa fa-tasks fa-fw"></i>Tasks
-                                        </div>
-                                        <!-- /.panel-heading -->
-                                        <div class="panel-body" style="overflow: hidden; height:auto">
-                                            <div class="row">
-                                            <div class="col-sm-12">
-                                                <%  string[] boostrap = { "\"progress-bar progress-bar-success\"", "\"progress-bar progress-bar-info\"", "\"progress-bar progress-bar-warning\"", "\"progress-bar progress-bar-danger\"" };%>
-                                                <%  int index = 0; %>
-                                                <%  TasksDataSource.SelectParameters.Add("Username",username); %>
-                                                <%  dv = (System.Data.DataView)TasksDataSource.Select(new DataSourceSelectArguments());%>
-                                                <%   foreach (System.Data.DataRow row in dv.Table.Rows)
-                                                     {
-                                                         int value = (Convert.ToInt32(row["Score"]) * 100 / Convert.ToInt32(row["MaxScore"])); %>
-                                                <div>
-                                                    <p>
-                                                        <strong><%=row["Category"]%></strong>
-                                                        <span class="pull-right text-muted"><%=value %>% Complete</span>
-                                                    </p>
-                                                    <div class="progress progress-striped active">
-                                                        <div class=<%=boostrap[index++]%> role="progressbar" aria-valuenow="<%=value%>" aria-valuemin="0" aria-valuemax="100" style="width:<%=value%>%">
-                                                            <span class="sr-only"><span><%=value%></span>% Complete (success)</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <%} %>
-                                            </div>
-                                        </div>
-                                        </div>
-                                        <!-- /.panel-body -->
-                                        <div class="panel-footer" style="overflow:hidden">
-                                            
-                                        </div>
+                    <div class="panel-heading">
+                        <i class="fa fa-tasks fa-fw"></i>Tasks
+                    </div>
+                    <!-- /.panel-heading -->
+                    <div class="panel-body" style="overflow: hidden; height:auto">
+                        <div class="row">
+                        <div class="col-sm-12">
+                            <%  string[] boostrap = { "\"progress-bar progress-bar-success\"", "\"progress-bar progress-bar-info\"", "\"progress-bar progress-bar-warning\"", "\"progress-bar progress-bar-danger\"" };%>
+                            <%  int index = 0; %>
+                            <%  TasksDataSource.SelectParameters.Add("Username",username); %>
+                            <%  dv = (System.Data.DataView)TasksDataSource.Select(new DataSourceSelectArguments());%>
+                            <%   foreach (System.Data.DataRow row in dv.Table.Rows)
+                                    {
+                                        int value = (Convert.ToInt32(row["Score"]) * 100 / Convert.ToInt32(row["MaxScore"])); %>
+                            <div>
+                                <p>
+                                    <strong><%=row["Category"]%></strong>
+                                    <span class="pull-right text-muted"><%=value %>% Complete</span>
+                                </p>
+                                <div class="progress progress-striped active">
+                                    <div class=<%=boostrap[index++]%> role="progressbar" aria-valuenow="<%=value%>" aria-valuemin="0" aria-valuemax="100" style="width:<%=value%>%">
+                                        <span class="sr-only"><span><%=value%></span>% Complete (success)</span>
                                     </div>
-                                    <!-- /.panel .chat-panel -->
+                                </div>
+                            </div>
+                            <%} %>
+                        </div>
+                    </div>
+                    </div>
+                    <!-- /.panel-body -->
+                    <div class="panel-footer" style="overflow:hidden">
+                                            
+                    </div>
+                </div>
+                <!-- /.panel .chat-panel -->
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Line Chart Example
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <div class="flot-chart">
+                                <div class="flot-chart-content" id="pie"></div>
+                            </div>
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
 
                 </div>
                 <!-- /.col-lg-4 -->
@@ -214,8 +225,19 @@
         </div>
         <!-- /#page-wrapper -->
         </div>
+        <!--gauge-->
         <script src="js/raphael-2.1.4.min.js"></script>
         <script src="js/justgage.js"></script>
+        
+        <!-- jQuery -->
+        <script src="bower_components/jquery/dist/jquery.min.js"></script>
+
+        <!-- Flot Charts JavaScript -->
+        <script src="bower_components/flot/jquery.flot.js"></script>
+        <script src="bower_components/flot/jquery.flot.pie.js"></script>
+        <script src="bower_components/flot/jquery.flot.resize.js"></script>
+        <script src="bower_components/flot.tooltip/js/jquery.flot.tooltip.min.js"></script>
+
         <script>
         <%  ScoreDataSource.SelectParameters.Clear();
             ScoreDataSource.SelectParameters.Add("Username", username);
@@ -231,6 +253,39 @@
             donut: true,
             levelColors: ["#ff0000", "#ffff00", "#008000"]
         });
+        </script>
+        
+        <script>
+            var data = [
+            {
+                label: "Series 0",
+                data: 3
+            }, 
+            {
+                label: "Series 1",
+                data: 6
+            }
+            ];
+
+            var plotObj = $.plot($("#pie"), data, {
+                series: {
+                    pie: {
+                        show: true
+                    }
+                },
+                grid: {
+                    hoverable: true
+                },
+                tooltip: true,
+                tooltipOpts: {
+                    content: "%p.0%, %s", // show percentages, rounding to 2 decimal places
+                    shifts: {
+                        x: 20,
+                        y: 0
+                    },
+                    defaultTheme: false
+                }
+            });  
         </script>     
         </body>
 </asp:Content>

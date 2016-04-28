@@ -127,14 +127,6 @@
 
     <!-- Custom Theme JavaScript -->
     <script src="dist/js/sb-admin-2.js"></script>
-
-    <!-- Flot Charts JavaScript -->
-    <script src="bower_components/flot/excanvas.min.js"></script>
-    <script src="bower_components/flot/jquery.flot.js"></script>
-    <script src="bower_components/flot/jquery.flot.pie.js"></script>
-    <script src="bower_components/flot/jquery.flot.resize.js"></script>
-    <script src="bower_components/flot/jquery.flot.time.js"></script>
-    <script src="bower_components/flot.tooltip/js/jquery.flot.tooltip.min.js"></script>
-    <script src="js/flot-data.js"></script>
+    
 </body>
 </html>
