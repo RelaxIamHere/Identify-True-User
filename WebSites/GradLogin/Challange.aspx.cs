@@ -147,7 +147,7 @@ public partial class _Challange : System.Web.UI.Page
                     if (dv.Table.Rows.Count == 1) //Update if exist
                     {
                         SubmissionDataSource.UpdateParameters.Clear();
-                        SubmissionDataSource.UpdateParameters.Add("Score", resultObj["result_score"].ToString());
+                        SubmissionDataSource.UpdateParameters.Add("Score", Convert.ToInt32(resultObj["result_score"]).ToString());
                         SubmissionDataSource.UpdateParameters.Add("SubmissionId", id);
                         SubmissionDataSource.UpdateParameters.Add("Question", Request.QueryString["p"]);
                         SubmissionDataSource.UpdateParameters.Add("Username", Membership.GetUser().UserName);
@@ -158,7 +158,7 @@ public partial class _Challange : System.Web.UI.Page
                     else //Insert
                     {
                         SubmissionDataSource.InsertParameters.Clear();
-                        SubmissionDataSource.InsertParameters.Add("Score", resultObj["result_score"].ToString());
+                        SubmissionDataSource.InsertParameters.Add("Score", Convert.ToInt32(resultObj["result_score"]).ToString());
                         SubmissionDataSource.InsertParameters.Add("SubmissionId", id);
                         SubmissionDataSource.InsertParameters.Add("Question", Request.QueryString["p"]);
                         SubmissionDataSource.InsertParameters.Add("Username", Membership.GetUser().UserName);
