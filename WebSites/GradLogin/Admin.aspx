@@ -2,12 +2,6 @@
     CodeFile="Admin.aspx.cs" Inherits="_Admin" %>
 
 <asp:Content ID="HeaderContent" runat="server" ContentPlaceHolderID="HeadContent">
-    <style type="text/css">
-        .style1
-        {
-            height: 20px;
-        }
-    </style>
 </asp:Content>
 <asp:Content ID="BodyContent" runat="server" ContentPlaceHolderID="MainContent">
     <asp:SqlDataSource ID="MapDataSource" runat="server" ConnectionString="<%$ ConnectionStrings:ApplicationServices %>"
@@ -32,7 +26,7 @@
                     <div class="col-lg-12">
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                Questions
+                                <label>Questions</label>
                             </div>
                             <!-- /.panel-heading -->
                             <div class="panel-body">
@@ -47,7 +41,7 @@
                                                         Category
                                                         <select onchange="javascript:__doPostBack('dropdownCategory','')" id="dropdownCategory"
                                                             runat="server" class="form-control input-sm" aria-controls="dataTables-example"
-                                                            name="dataTables-example_length">
+                                                            name="dataTables-example_length" style="-moz-appearance: none;">
                                                         </select>
                                                     </label>
                                                 </div>
@@ -138,7 +132,7 @@
                                                     <label>
                                                         Show
                                                         <select onchange="javascript:__doPostBack('dropdownSize','')" id="dropdownSize" runat="server"
-                                                            class="form-control input-sm" aria-controls="dataTables-example" name="dataTables-example_length">
+                                                            class="form-control input-sm" aria-controls="dataTables-example" name="dataTables-example_length" style="-moz-appearance: none;">
                                                             <option value="10">10</option>
                                                             <option value="25">25</option>
                                                             <option value="50">50</option>
@@ -175,7 +169,7 @@
                                 <div class="col-lg-4">
                                     <div class="chat-panel panel panel-default">
                                         <div class="panel-heading">
-                                            <i class="fa fa-pencil fa-fw"></i>Create Question
+                                            <label><i class="fa fa-pencil fa-fw"></i> Create Question</label>
                                         </div>
                                         <!-- /.panel-heading -->
                                         <div class="panel-footer" style="overflow: hidden;">

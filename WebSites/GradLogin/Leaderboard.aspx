@@ -2,12 +2,6 @@
     CodeFile="Leaderboard.aspx.cs" Inherits="_Leaderboard" %>
 
 <asp:Content ID="HeaderContent" runat="server" ContentPlaceHolderID="HeadContent">
-    <style type="text/css">
-        .style1
-        {
-            height: 20px;
-        }
-    </style>
 </asp:Content>
 <asp:Content ID="BodyContent" runat="server" ContentPlaceHolderID="MainContent">
 
@@ -41,14 +35,14 @@
                     <div class="col-lg-12">
                         <div class="panel panel-default">
                         <div class="panel-heading">
-                            Ranking Table
+                             <label><i class="fa fa-trophy fa-fw"></i> Ranking Table</label>
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
                             <div class="dataTable_wrapper">
                                 <div class="dataTables_wrapper form-inline dt-bootstrap no-footer" id="dataTables-example_wrapper">
                                 <div class="row"><div class="col-sm-6"><div id="dataTables-example_length" class="dataTables_length">
-                                <label id="labelCategory" runat="server"> Category <select onchange="javascript:__doPostBack('dropdownCategory','')" id="dropdownCategory" runat="server" class="form-control input-sm" aria-controls="dataTables-example" name="dataTables-example_length">
+                                <label id="labelCategory" runat="server"> Category <select onchange="javascript:__doPostBack('dropdownCategory','')" id="dropdownCategory" runat="server" class="form-control input-sm" aria-controls="dataTables-example" name="dataTables-example_length" style="-moz-appearance: none;">
                                 </select> </label></div></div><div class="col-sm-6"><div class="dataTables_filter" id="dataTables-example_filter">
                                
                                  <div class="input-group">
@@ -93,7 +87,7 @@
                                 </table></div></div>
 
                                 <div class="row"><div class="col-sm-6"><div id="dataTables-example_length" class="dataTables_length">
-                                <label>Show <select onchange="javascript:__doPostBack('dropdownSize','')" id="dropdownSize" runat="server" class="form-control input-sm" aria-controls="dataTables-example" name="dataTables-example_length"><option value="10">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select> entries</label></div></div></div>
+                                <label>Show <select onchange="javascript:__doPostBack('dropdownSize','')" id="dropdownSize" runat="server" class="form-control input-sm" aria-controls="dataTables-example" name="dataTables-example_length" style="-moz-appearance: none;"><option value="10">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select> entries</label></div></div></div>
                                 
                                 <div class="row"><div class="col-sm-6"><div aria-live="polite" role="status" id="dataTables-example_info" class="dataTables_info"><span id="recordCount" runat="server">Showing 1 to 10 of 57 entries</span></div></div>
                                 <div class="col-sm-6">

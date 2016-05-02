@@ -84,10 +84,6 @@ public partial class _Compiler : System.Web.UI.Page
                         }
                     }
                 }
-                else
-                {
-                    //TODO run compile test etc... delay
-                }
             }
         }
 }

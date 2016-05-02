@@ -24,32 +24,36 @@
 <div class="col-lg-12">
 <div class="col-lg-8">
 <center><label id="labelResult" runat=server visible=false></label></center>
-<div style="width:95%; border-left-color: #5bc0de; padding: 10px; margin: 0 auto; border: 1px solid #eee; border-left-width: 5px; border-radius: 3px;">
-<h3><strong><input id="qName" runat="server" class="form-control" type="text" placeholder="Question Name" /></strong></h3>
-<p><textarea id="qText1" runat="server" class="form-control" type="text" rows="4" placeholder="Question Text" /></p>
-<h4>Input</h4>
-<p><textarea id="qText2" runat="server" class="form-control" type="text" rows="4" placeholder="Input Description Text" /></p>
-<h4>Output</h4>
-<p><textarea id="qText3" runat="server" class="form-control" type="text" rows="4" placeholder="Output Description Text" /></p>
-<h4>Example</h4>
-<pre>
-<strong>Input:</strong>
-<p><textarea id="qText4" runat="server" class="form-control" type="text" rows="4" placeholder="Example Input" /></p>
-<strong>Output:</strong>
-<p><textarea id="qText5" runat="server" class="form-control" type="text" rows="4" placeholder="Example Output" /></p>
-</pre>
-<button runat="server" id="buttonUpdate" onclick="javascript:updateActive()" class="btn btn-primary btn-sm pull-right">
-Update Question
-</button>
-<br /><br />
-</div>
-<br />
+       <div class="panel panel-default">
+        <div class="panel-heading">
+            <label><i class="fa fa-pencil fa-fw"></i> Edit Question</label>
+        </div>
+        <!-- /.panel-heading -->
+
+        <div class="panel-footer" style="height:auto; overflow:hidden;">
+         <h3><strong><input id="qName" runat="server" class="form-control" type="text" placeholder="Question Name" /></strong></h3>
+        <p><textarea id="qText1" runat="server" class="form-control" type="text" rows="4" placeholder="Question Text" /></p>
+        <h4>Input</h4>
+        <p><textarea id="qText2" runat="server" class="form-control" type="text" rows="4" placeholder="Input Description Text" /></p>
+        <h4>Output</h4>
+        <p><textarea id="qText3" runat="server" class="form-control" type="text" rows="4" placeholder="Output Description Text" /></p>
+        <h4>Example</h4>
+        <pre><strong>Input:</strong>
+        <p><textarea id="qText4" runat="server" class="form-control" type="text" rows="4" placeholder="Example Input" /></p><strong>Output:</strong>
+        <p><textarea id="qText5" runat="server" class="form-control" type="text" rows="4" placeholder="Example Output" /></p>
+        </pre>
+        <button runat="server" id="buttonUpdate" onclick="javascript:updateActive()" class="btn btn-primary btn-sm pull-right">
+        Update Question
+        </button>
+        </div>
+        </div>
+
 </div>     
                                 <div class="col-lg-4">
 
                                     <div class="chat-panel panel panel-default" id="divTestcase" runat="server" visible=false>
                                         <div class="panel-heading">
-                                            <i class="fa fa-pencil fa-fw"></i> <label id="labelIdTestcase" runat="server"></label>
+                                            <label><i class="fa fa-pencil fa-fw"></i> <label id="labelIdTestcase" runat="server"></label></label>
                                         </div>
                                         <!-- /.panel-heading -->
                                         <div class="panel-footer" style="overflow: hidden;">
@@ -82,13 +86,13 @@ Update Question
 
                                     <div class="chat-panel panel panel-default">
                                         <div class="panel-heading">
-                                            <i class="fa fa-pencil fa-fw"></i>Edit TestCases
+                                            <label><i class="fa fa-pencil fa-fw"></i> Edit TestCase</label>
                                         </div>
                                         <!-- /.panel-heading -->
                                         <div class="panel-body" style="overflow: hidden; height:auto">
                                             <div class="row">
                                             <div class="col-sm-12">
-                                                <table style="width: 100%;" aria-describedby="dataTables-example_info" role="grid"
+                                                <table aria-describedby="dataTables-example_info" role="grid"
                                                     class="table table-striped table-bordered table-hover dataTable no-footer dtr-inline"
                                                     id="dataTables" width="100%">
                                                     <thead>
