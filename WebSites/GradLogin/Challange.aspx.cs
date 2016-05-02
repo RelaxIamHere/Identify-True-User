@@ -97,12 +97,12 @@ public partial class _Challange : System.Web.UI.Page
                     TextBoxOutput.Text = "";
                     if (resultObj["result_stdout"].Contains("DATASET NUMBER: 0"))
                         TextBoxOutput.Text = resultObj["result_stdout"].Split('\n')[2];
-                            
-                    TextBoxScore.Text = "SCORE: " +resultObj["result_score"];
+
+                    TextBoxScore.Text = "SCORE: " + resultObj["result_score"];
 
                     for (int i = 0; i < resultObj["result_array"].Count; i++)
                     {
-                        TextBoxScore.Text += "\n\nTEST CASE: "+(i+1).ToString();
+                        TextBoxScore.Text += "\n\nTEST CASE: " + (i + 1).ToString();
                         TextBoxScore.Text += "\ntime: " + resultObj["result_array"][i]["time"];
                         TextBoxScore.Text += "\nmemory: " + resultObj["result_array"][i]["memory"];
                         TextBoxScore.Text += "\nstatus: " + resultObj["result_array"][i]["statusDescription"];
@@ -137,7 +137,7 @@ public partial class _Challange : System.Web.UI.Page
                     if (resultObj["status"] == 20 || resultObj["status"] == 21)
                         TextBoxCompiler.Text += "Internal Error\n";
 
-                    Page.ClientScript.RegisterStartupScript(this.GetType(),"init", "g1.refresh("+resultObj["result_score"]+")", true);
+                    Page.ClientScript.RegisterStartupScript(this.GetType(), "init", "g1.refresh(" + resultObj["result_score"] + ")", true);
 
                     SubmissionDataSource.SelectParameters.Clear(); //Select
                     SubmissionDataSource.SelectParameters.Add("Question", Request.QueryString["p"]);
@@ -152,7 +152,7 @@ public partial class _Challange : System.Web.UI.Page
                         SubmissionDataSource.UpdateParameters.Add("Question", Request.QueryString["p"]);
                         SubmissionDataSource.UpdateParameters.Add("Username", Membership.GetUser().UserName);
                         SubmissionDataSource.UpdateParameters.Add("Date", DateTime.Now.ToString());
-                        SubmissionDataSource.UpdateParameters.Add("Language", DropDownLanguage.Items[resultObj["language"]-1].Text);
+                        SubmissionDataSource.UpdateParameters.Add("Language", DropDownLanguage.Items[resultObj["language"] - 1].Text);
                         SubmissionDataSource.Update();
                     }
                     else //Insert
@@ -163,13 +163,9 @@ public partial class _Challange : System.Web.UI.Page
                         SubmissionDataSource.InsertParameters.Add("Question", Request.QueryString["p"]);
                         SubmissionDataSource.InsertParameters.Add("Username", Membership.GetUser().UserName);
                         SubmissionDataSource.InsertParameters.Add("Date", DateTime.Now.ToString());
-                        SubmissionDataSource.InsertParameters.Add("Language", DropDownLanguage.Items[resultObj["language"]-1].Text);
+                        SubmissionDataSource.InsertParameters.Add("Language", DropDownLanguage.Items[resultObj["language"] - 1].Text);
                         SubmissionDataSource.Insert();
                     }
-                }
-                else
-                {
-                    //TODO run compile test etc... delay
                 }
             }
         }

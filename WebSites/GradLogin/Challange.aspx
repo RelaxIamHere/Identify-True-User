@@ -6,6 +6,8 @@
     <!--Code Mirror-->
     <link href="js/codemirror-5.8/lib/codemirror.css" rel="stylesheet" type="text/css" />
     <link href="js/codemirror-5.8/theme/ambiance.css" rel="stylesheet" type="text/css" />
+    <!-- Overlay-->
+    <link href="Styles/overlay.css" rel="stylesheet" type="text/css" />
     </head>
 </asp:Content>
 <asp:Content ID="BodyContent" runat="server" ContentPlaceHolderID="MainContent">
@@ -21,10 +23,19 @@
         SelectCommand="SELECT [Category] FROM [MAP] WHERE [Question]=@Question"></asp:SqlDataSource>
 
     <body>
+        <div id="overlay" class="overlay">
+            <div class="overlay-content">
+                <a href="javascript:void(0);">
+                <image src="Styles/comp.gif"></image>
+                </a>
+                <a href="javascript:void(0);"> Please Wait ...</a>
+            </div>
+        </div>
+
         <div id="wrapper">
             <div id="page-wrapper">
                 <div class="row">
-                    <div style="right:0; position:absolute; overflow:hidden;">
+                    <div style="right:5px; position:absolute; overflow:hidden;">
                     <br />
                         <a href="Leaderboard.aspx?p=<%=Request.QueryString["p"]%>">
                             <div id="g1" style="height:100px; width:100px;"></div>
@@ -44,45 +55,68 @@
                         border: 1px solid #eee; border-left-width: 5px; border-radius: 3px;"></div>
 
                     <br />
-                    <div class="col-md-12">
-                        <label for="comment">
-                            Select Language:</label><br />
-                        <asp:DropDownList ID="DropDownLanguage" class="btn btn-primary" runat="server">
-                        </asp:DropDownList><br /><br />
-                    </div>
-                    <div class="col-md-12">
-                        <label for="comment">
-                            Code:</label><br />
-                        <asp:TextBox ID="TextBoxCode" class="form-control" runat="server" TextMode="MultiLine"></asp:TextBox><br />
-                    </div>
-                    <div class=col-md-12>
-                        <div class="col-md-3">
-                        <asp:Button ID="ButtonCompile" class="btn btn-primary btn-block" runat="server"
-                            OnClick="ButtonCompile_Click" Text="Compile" />
+
+                    <div class="col-lg-12">
+                        <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <label><i class="fa fa-keyboard-o fa-fw"></i> Code</label>
+                            <asp:DropDownList ID="DropDownLanguage" class="btn btn-primary pull-right" runat="server" style="-moz-appearance: none;">
+                            </asp:DropDownList><br /><br />
+                        </div>
+                        <!-- /.panel-heading -->
+                        <asp:TextBox ID="TextBoxCode" class="form-control" runat="server" TextMode="MultiLine"></asp:TextBox>
+                        <div class="panel-footer" style="height:auto; overflow:hidden;">
+             
+                            <asp:Button ID="ButtonCompile" class="btn btn-primary pull-right" runat="server"
+                            OnClick="ButtonCompile_Click" OnClientClick="openOverlay()" Text="Compile" />
+                        </div>
                         </div>
                     </div>
-                    
-                    <div class="col-md-12">
-                    <br />
-                        <div class="col-md-6">
-                            <label for="comment">
-                                Result:</label><br />
-                            <asp:TextBox ID="TextBoxCompiler" Style="font-size: 12px; width: 100%; height: 150px;" class="form-control"
-                                runat="server" TextMode="MultiLine" Enabled="False"></asp:TextBox><br />
+
+                    <div class="col-lg-6">
+                     <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <label><i class="fa fa-gears fa-fw"></i> Result</label>
                         </div>
-                        <div class="col-md-3">
-                            <label for="comment">
-                                Output (First Test Case):</label><br />
-                            <asp:TextBox ID="TextBoxOutput" Style="font-size: 12px; width: 100%;  height: 150px;" class="form-control"
-                                runat="server" TextMode="MultiLine" Enabled="False"></asp:TextBox><br />
-                        </div>
-                        <div class="col-md-3">
-                            <label for="comment">
-                                Score:</label><br />
-                            <asp:TextBox ID="TextBoxScore" Style="font-size: 12px; width: 100%;  height: 150px;" class="form-control"
-                                runat="server" TextMode="MultiLine" Enabled="False"></asp:TextBox><br /><br /><br />
+                        <!-- /.panel-heading -->
+                        <div class="panel-body" style="height:auto; overflow:hidden;">
+                                  <div class="col-sm-12">
+                                    <asp:TextBox ID="TextBoxCompiler" Style="font-size: 12px; width: 100%; height: 150px;" class="form-control"
+                                 runat="server" TextMode="MultiLine" Enabled="False"></asp:TextBox>
+                                   </div>  
+                            </div>
                         </div>
                     </div>
+                    <div class="col-lg-3">
+                        <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <label><i class="fa fa-arrow-circle-left fa-fw"></i> Output (First Testcase)</label>
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body" style="height:auto; overflow:hidden;">
+                            <div class="col-sm-12">
+                                <asp:TextBox ID="TextBoxOutput" Style="font-size: 12px; width: 100%;  height: 150px;" class="form-control"
+                                runat="server" TextMode="MultiLine" Enabled="False"></asp:TextBox>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3">
+                        <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <label><i class="fa fa-keyboard-o fa-fw"></i> Testcases</label>
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body" style="height:auto; overflow:hidden;">
+                            <div class="col-sm-12">
+                                <asp:TextBox ID="TextBoxScore" Style="font-size: 12px; width: 100%;  height: 150px;" class="form-control"
+                                runat="server" TextMode="MultiLine" Enabled="False"></asp:TextBox>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
             <!-- /#page-wrapper -->
@@ -113,6 +147,11 @@
             levelColors: ["#ff0000", "#ffff00", "#008000"]
         });
         <% }%>        
+    </script>
+    <script>
+        function openOverlay() {
+            document.getElementById("overlay").style.height = "100%";
+        }
     </script>
     </body>
 </asp:Content>
