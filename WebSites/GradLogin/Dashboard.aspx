@@ -428,7 +428,7 @@
         <%  PieCategoryDataSource.SelectParameters.Add("Username",username); %>
         <%  dv = (System.Data.DataView)PieCategoryDataSource.Select(new DataSourceSelectArguments());%>
             
-            var data = [
+            data = [
             <%   foreach (System.Data.DataRow row in dv.Table.Rows){ %>
                 {
                     label: "<%=row["Category"]%>",
@@ -438,7 +438,7 @@
             <% } %>
             ];
 
-            var plotObj = $.plot($("#pieCategory"), data, {
+            plotObj = $.plot($("#pieCategory"), data, {
                 series: {
                     pie: {
                         show: true
