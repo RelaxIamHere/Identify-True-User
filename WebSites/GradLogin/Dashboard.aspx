@@ -322,7 +322,7 @@
                 document.getElementById("hide").style.display = "none";
             else
                 document.getElementById("hide").style.display = "block";
-            if($("#page-wrapper").width() < 872)
+            if($("#page-wrapper").width() < 875)
                 document.getElementById("panel").style.display = "none";
             else
                 document.getElementById("panel").style.display = "block";
