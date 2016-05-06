@@ -45,7 +45,7 @@
                         </p>
                         <div class="panel-body">
                             <form role="form">
-                            <asp:Login ID="Login1" runat="server" EnableViewState="false" RenderOuterTable="false" >
+                            <asp:Login ID="Login1" runat="server" EnableViewState="false" RenderOuterTable="false" DestinationPageUrl="Dashboard.aspx" >
                                 <LayoutTemplate>
                                     <span class="failureNotification">
                                         <asp:Literal ID="FailureText" runat="server"></asp:Literal>
