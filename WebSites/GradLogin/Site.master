@@ -52,7 +52,7 @@
                         <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                        <li><a href="ChangePassword.aspx"><i class="fa fa-user fa-fw"></i> User Profile</a>
                         </li>
                         <li><a href="Admin.aspx"><i class="fa fa-gears fa-fw"></i> Admin Panel</a>
                         </li>

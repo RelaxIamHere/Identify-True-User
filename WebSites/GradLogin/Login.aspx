@@ -10,7 +10,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="">
         <meta name="author" content="">
-        <title>SB Admin 2 - Bootstrap Admin Theme</title>
         <!-- Bootstrap Core CSS -->
         <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
         <!-- MetisMenu CSS -->
@@ -35,14 +34,9 @@
                 <div class="col-md-4 col-md-offset-4">
                     <div class="login-panel panel panel-default">
                         <div class="panel-heading">
-                            <h3 class="panel-title">
-                                <asp:Label ID="Label2" runat="server" Text="Please Sign In"></asp:Label></h3></h3>
+                            <h4 class="page-title">Sign In</h4>
                         </div>
-                        <p>
-                            Please enter your username and password.
-                            <asp:HyperLink ID="HyperLink1" runat="server" EnableViewState="false">Register</asp:HyperLink>
-                            if you don't have an account.
-                        </p>
+
                         <div class="panel-body">
                             <form role="form">
                             <asp:Login ID="Login1" runat="server" EnableViewState="false" RenderOuterTable="false" DestinationPageUrl="Dashboard.aspx" >
@@ -54,7 +48,7 @@
                                         ValidationGroup="LoginUserValidationGroup" />
                                         <fieldset>
                                             <div class="form-group">
-                                                <asp:TextBox class="form-control" placeholder="E-mail" ID="UserName" runat="server"></asp:TextBox>
+                                                <asp:TextBox class="form-control" placeholder="Username" ID="UserName" runat="server"></asp:TextBox>
                                                 <asp:RequiredFieldValidator ID="UserNameRequired" runat="server" ControlToValidate="UserName"
                                                     CssClass="failureNotification" ErrorMessage="User Name is required." ToolTip="User Name is required."
                                                     ValidationGroup="LoginUserValidationGroup" Display="Dynamic">*</asp:RequiredFieldValidator>
@@ -79,6 +73,9 @@
                                 </LayoutTemplate>
                             </asp:Login>
                             </form>
+                            <p style="padding:10px;"><center>
+                            <asp:HyperLink ID="HyperLink1" runat="server" EnableViewState="false">Register</asp:HyperLink>
+                            if you don't have an account.</center></p>
                         </div>
                     </div>
                 </div>
