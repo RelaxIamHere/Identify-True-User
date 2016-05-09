@@ -55,6 +55,19 @@
                        WHERE (Username = @Username) AND (YEAR(Date) = YEAR(GETDATE()))
                        GROUP BY CAST(Date AS DATE)"></asp:SqlDataSource>
 
+<asp:SqlDataSource ID="ContactDataSource" runat="server"
+        ConnectionString="<%$ ConnectionStrings:ApplicationServices %>"
+        SelectCommand="SELECT Name, Surname, Birthday, Phone, Mail, Website, Country, City, Address, Company, School
+                       FROM Contact WHERE (Username = @Username)"></asp:SqlDataSource>
+<!-- Progress Bar dolu sutun sayısı -->                 
+<asp:SqlDataSource ID="ContactProgress" runat="server"
+        ConnectionString="<%$ ConnectionStrings:ApplicationServices %>"
+        SelectCommand="SELECT (CASE WHEN Name IS NULL THEN 0 ELSE 1 END) + (CASE WHEN Surname IS NULL THEN 0 ELSE 1 END) + (CASE WHEN Birthday IS NULL THEN 0 ELSE 1 END) 
+                         + (CASE WHEN Phone IS NULL THEN 0 ELSE 1 END) + (CASE WHEN Mail IS NULL THEN 0 ELSE 1 END) + (CASE WHEN Website IS NULL THEN 0 ELSE 1 END) 
+                         + (CASE WHEN Country IS NULL THEN 0 ELSE 1 END) + (CASE WHEN City IS NULL THEN 0 ELSE 1 END) + (CASE WHEN Address IS NULL THEN 0 ELSE 1 END) 
+                         + (CASE WHEN Company IS NULL THEN 0 ELSE 1 END) + (CASE WHEN School IS NULL THEN 0 ELSE 1 END) AS filled_fields
+                       FROM Contact WHERE (Username = @Username)"></asp:SqlDataSource>
+
 
 <%
     string username = Membership.GetUser().UserName;
@@ -141,13 +154,69 @@
                         </div>
                         <!-- /.panel-body -->
 
-                         <div class="panel panel-default" id="panel">
-                        <div class="panel-heading">
-                            <label><i class="fa fa-user fa-fw"></i> User Profile</label>
-                        </div>
+                        <div class="panel panel-default" id="panel">
+                            <div class="panel-heading">
+                                <label><i class="fa fa-user fa-fw"></i> User Profile</label>
+                            </div>
                         <!-- /.panel-heading -->
-                        <div class="panel-body" id="resize" style="height:auto">
+                            <div class="panel-body" id="resize" style="height:auto">
                                 <div class="col-sm-12">
+                                    <a style="float:right" href="ChangePassword.aspx" class="btn btn-primary">Update</a>
+                                </div>
+                                <div class="col-sm-12">
+                                    <table>
+                                    <%  ContactDataSource.SelectParameters.Add("Username", username); %>
+                                    <%  dv = (System.Data.DataView)ContactDataSource.Select(new DataSourceSelectArguments());%>
+                                    <%   foreach (System.Data.DataRow line in dv.Table.Rows)
+                                         {
+                                             DateTime dt = (DateTime)line["Birthday"];   //TO DO : textboxa default "mm/dd/yyyy" stringi giderse patlar düzelt.
+                                             int age = DateTime.Today.Year - dt.Year; %>
+                                        <tr>
+                                            <td>Name:</td>
+                                            <td><%=line["Name"]%></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Surname:</td>
+                                            <td><%=line["Surname"]%></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Age:</td>
+                                            <td><% =age%></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Phone:</td>
+                                            <td><%=line["Phone"]%></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Mail:</td>
+                                            <td><%=line["Mail"]%></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Website:</td>
+                                            <td><%=line["Website"]%></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Country:</td>
+                                            <td><%=line["Country"]%></td>
+                                        </tr>
+                                        <tr>
+                                            <td>City:</td>
+                                            <td><%=line["City"]%></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Address:</td>
+                                            <td><%=line["Address"]%></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Company:</td>
+                                            <td><%=line["Company"]%></td>
+                                        </tr>
+                                        <tr>
+                                            <td>School:</td>
+                                            <td><%=line["School"]%></td>
+                                        </tr>
+                                        <% }%>  
+                                    </table>
                                 </div>    
                             </div>
                         </div>
