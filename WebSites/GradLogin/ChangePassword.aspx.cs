@@ -11,24 +11,26 @@ public partial class _ChangePassword : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        // TO DO
-        //ContactDataSource.SelectParameters.Clear();
-        //ContactDataSource.SelectParameters.Add("Username", Membership.GetUser().UserName);
-        //System.Data.DataView dv = (System.Data.DataView)ContactDataSource.Select(new DataSourceSelectArguments());
-        //foreach (System.Data.DataRow line in dv.Table.Rows)
-        //{
-        //    name.Value = line["Name"].ToString();
-        //    surname.Value = line["Surname"].ToString();
-        //    birthday.Text = line["Birthday"].ToString();
-        //    phone.Value = line["Phone"].ToString();
-        //    mail.Value = line["Mail"].ToString();
-        //    website.Value = line["Website"].ToString();
-        //    country.Value = line["Country"].ToString();
-        //    city.Value = line["City"].ToString();
-        //    address.Value = line["Address"].ToString();
-        //    company.Value = line["Company"].ToString();
-        //    school.Value = line["School"].ToString();
-        //}
+        if (!Page.IsPostBack)
+        {
+            ContactDataSource.SelectParameters.Clear();
+            ContactDataSource.SelectParameters.Add("Username", Membership.GetUser().UserName);
+            System.Data.DataView dv = (System.Data.DataView)ContactDataSource.Select(new DataSourceSelectArguments());
+            foreach (System.Data.DataRow line in dv.Table.Rows)
+            {
+                name.Value = line["Name"].ToString();
+                surname.Value = line["Surname"].ToString();
+                birthday.Text = line["Birthday"].ToString();
+                phone.Value = line["Phone"].ToString();
+                mail.Value = line["Mail"].ToString();
+                website.Value = line["Website"].ToString();
+                country.Value = line["Country"].ToString();
+                city.Value = line["City"].ToString();
+                address.Value = line["Address"].ToString();
+                company.Value = line["Company"].ToString();
+                school.Value = line["School"].ToString();
+            }
+        }
     }
     protected void ContactButton_Click(object sender, EventArgs e)
     {
