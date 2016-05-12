@@ -62,10 +62,10 @@
 <!-- Progress Bar dolu sutun sayısı -->                 
 <asp:SqlDataSource ID="ContactProgress" runat="server"
         ConnectionString="<%$ ConnectionStrings:ApplicationServices %>"
-        SelectCommand="SELECT (CASE WHEN Name IS NULL THEN 0 ELSE 1 END) + (CASE WHEN Surname IS NULL THEN 0 ELSE 1 END) + (CASE WHEN Birthday IS NULL THEN 0 ELSE 1 END) 
+        SelectCommand="SELECT cast(((CASE WHEN Name IS NULL THEN 0 ELSE 1 END) + (CASE WHEN Surname IS NULL THEN 0 ELSE 1 END) + (CASE WHEN Birthday IS NULL THEN 0 ELSE 1 END) 
                          + (CASE WHEN Phone IS NULL THEN 0 ELSE 1 END) + (CASE WHEN Mail IS NULL THEN 0 ELSE 1 END) + (CASE WHEN Website IS NULL THEN 0 ELSE 1 END) 
                          + (CASE WHEN Country IS NULL THEN 0 ELSE 1 END) + (CASE WHEN City IS NULL THEN 0 ELSE 1 END) + (CASE WHEN Address IS NULL THEN 0 ELSE 1 END) 
-                         + (CASE WHEN Company IS NULL THEN 0 ELSE 1 END) + (CASE WHEN School IS NULL THEN 0 ELSE 1 END) AS filled_fields
+                         + (CASE WHEN Company IS NULL AND School IS NULL THEN 0 ELSE 1 END)) as float) AS filled_fields
                        FROM Contact WHERE (Username = @Username)"></asp:SqlDataSource>
 
 
@@ -161,7 +161,12 @@
                         <!-- /.panel-heading -->
                             <div class="panel-body" id="resize" style="height:auto">
                                 <div class="col-sm-12">
+                                    <div class="col-sm-10">
+                                    <div role="button" tabindex="0" aria-label="Download" class="Download" data-progressbar-label="Profile Progress..."></div>
+                                    </div>
+                                    <div class="col-sm-2">
                                     <a style="float:right" href="ChangePassword.aspx" class="btn btn-primary">Update</a>
+                                    </div>
                                 </div>
                                 <div class="col-sm-12">
                                     <table>
@@ -370,6 +375,11 @@
 
         <!-- jQuery -->
         <script src="bower_components/jquery/dist/jquery.min.js"></script>
+
+        <!-- Elastic Progress JavaScript -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.17.0/TweenMax.min.js"></script>
+        <script src="dist/js/elastic-progress.js"></script>
+
         <!--gauge-->
         <script src="js/raphael-2.1.4.min.js"></script>
         <script src="js/justgage.js"></script>
@@ -382,7 +392,34 @@
         
         <!-- Calendar -->
         <script type="text/javascript" src="js/loader.js"></script>
-        <script type="text/javascript"> 
+        
+
+        <script type="text/javascript">      
+        $(document).ready(function() {
+        <%  ContactProgress.SelectParameters.Add("Username", username); %>
+        <%  dv = (System.Data.DataView)ContactProgress.Select(new DataSourceSelectArguments());%>
+        var x = <% =dv.Table.Rows[0]["filled_fields"] %>;
+		$(".Download").eq(0).ElasticProgress({
+				buttonSize: 60,
+				fontFamily: "Montserrat",
+				colorBg: "#adeca8",
+				colorFg: "#7cc576",
+				onClick: function(event) {
+						$(this).ElasticProgress("open");
+				},
+				onOpen: function(event) {
+						$(this).ElasticProgress("setValue",x/10);
+				},
+				onFail: function(event) {
+						$(this).ElasticProgress("open");
+				},
+				onCancel: function(event) {
+						$(this).ElasticProgress("open");
+				}
+		});
+
+		$(".Download").ElasticProgress("open");
+        });
         
         $("#page-wrapper").resize(function (e) {
             var x = $("#referance").position().top - $("#resize").position().top;
