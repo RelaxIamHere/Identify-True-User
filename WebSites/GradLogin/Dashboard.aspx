@@ -396,9 +396,12 @@
 
         <script type="text/javascript">      
         $(document).ready(function() {
+        var x;
         <%  ContactProgress.SelectParameters.Add("Username", username); %>
         <%  dv = (System.Data.DataView)ContactProgress.Select(new DataSourceSelectArguments());%>
-        var x = <% =dv.Table.Rows[0]["filled_fields"] %>;
+        <% foreach (System.Data.DataRow line in dv.Table.Rows){ %>
+             x = <% =line["filled_fields"] %>;
+        <%} %>
 		$(".Download").eq(0).ElasticProgress({
 				buttonSize: 60,
 				fontFamily: "Montserrat",
