@@ -169,7 +169,7 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-12">
-                                    <table>
+                                    <table class="table table-hover">
                                     <%  ContactDataSource.SelectParameters.Add("Username", username); %>
                                     <%  dv = (System.Data.DataView)ContactDataSource.Select(new DataSourceSelectArguments());%>
                                     <%   foreach (System.Data.DataRow line in dv.Table.Rows)
@@ -177,47 +177,47 @@
                                              DateTime? dt = (DateTime?)line["Birthday"]; 
                                              int age = DateTime.Today.Year - dt.Value.Year; %>
                                         <tr>
-                                            <td>Name:</td>
-                                            <td><%=line["Name"]%></td>
+                                            <th style="width: 20%;">Name:</th>
+                                            <td style="width: 80%;"><%=line["Name"]%></td>
                                         </tr>
                                         <tr>
-                                            <td>Surname:</td>
+                                            <th>Surname:</th>
                                             <td><%=line["Surname"]%></td>
                                         </tr>
                                         <tr>
-                                            <td>Age:</td>
+                                            <th>Age:</th>
                                             <td><% =age%></td>
                                         </tr>
                                         <tr>
-                                            <td>Phone:</td>
+                                            <th>Phone:</th>
                                             <td><%=line["Phone"]%></td>
                                         </tr>
                                         <tr>
-                                            <td>Mail:</td>
+                                            <th>Mail:</th>
                                             <td><%=line["Mail"]%></td>
                                         </tr>
                                         <tr>
-                                            <td>Website:</td>
+                                            <th>Website:</th>
                                             <td><%=line["Website"]%></td>
                                         </tr>
                                         <tr>
-                                            <td>Country:</td>
+                                            <th>Country:</th>
                                             <td><%=line["Country"]%></td>
                                         </tr>
                                         <tr>
-                                            <td>City:</td>
+                                            <th>City:</th>
                                             <td><%=line["City"]%></td>
                                         </tr>
                                         <tr>
-                                            <td>Address:</td>
+                                            <th>Address:</th>
                                             <td><%=line["Address"]%></td>
                                         </tr>
                                         <tr>
-                                            <td>Company:</td>
+                                            <th>Company:</th>
                                             <td><%=line["Company"]%></td>
                                         </tr>
                                         <tr>
-                                            <td>School:</td>
+                                            <th>School:</th>
                                             <td><%=line["School"]%></td>
                                         </tr>
                                         <% }%>  
