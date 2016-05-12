@@ -121,6 +121,9 @@
             </div>
             <!-- /#page-wrapper -->
         </div>
+    <!-- jQuery -->
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+
     <script src="js/codemirror-5.8/lib/codemirror.js" type="text/javascript"></script>
     <script src="js/codemirror-5.8/mode/clike/clike.js" type="text/javascript"></script>
     <script src="js/codemirror-5.8/addon/edit/matchbrackets.js" type="text/javascript"></script>

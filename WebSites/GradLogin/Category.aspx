@@ -43,6 +43,9 @@
         <script src="js/raphael-2.1.4.min.js"></script>
         <script src="js/justgage.js"></script>
 
+        <!-- jQuery -->
+        <script src="bower_components/jquery/dist/jquery.min.js"></script>
+
          <script>
         <%  ScoreDataSource.SelectParameters.Clear();
             ScoreDataSource.SelectParameters.Add("Username", Membership.GetUser().UserName);

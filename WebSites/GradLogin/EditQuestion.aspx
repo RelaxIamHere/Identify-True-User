@@ -136,6 +136,8 @@
             <!-- /#page-wrapper -->           
         </div>
     </body>
+    <!-- jQuery -->
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
     <script type="text/javascript">
         function updateActive() {
            var counter=0;
