@@ -20,7 +20,8 @@ public partial class _ChangePassword : System.Web.UI.Page
             {
                 name.Value = line["Name"].ToString();
                 surname.Value = line["Surname"].ToString();
-                birthday.Text = line["Birthday"].ToString();
+                DateTime dt = (DateTime)line["Birthday"];
+                birthday.Text = dt.ToString("yyyy-MM-dd");
                 phone.Value = line["Phone"].ToString();
                 mail.Value = line["Mail"].ToString();
                 website.Value = line["Website"].ToString();
