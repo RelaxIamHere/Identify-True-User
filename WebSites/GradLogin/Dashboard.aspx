@@ -174,8 +174,8 @@
                                     <%  dv = (System.Data.DataView)ContactDataSource.Select(new DataSourceSelectArguments());%>
                                     <%   foreach (System.Data.DataRow line in dv.Table.Rows)
                                          {
-                                             DateTime dt = (DateTime)line["Birthday"];   //TO DO : textboxa default "mm/dd/yyyy" stringi giderse patlar düzelt.
-                                             int age = DateTime.Today.Year - dt.Year; %>
+                                             DateTime? dt = (DateTime?)line["Birthday"]; 
+                                             int age = DateTime.Today.Year - dt.Value.Year; %>
                                         <tr>
                                             <td>Name:</td>
                                             <td><%=line["Name"]%></td>

@@ -112,7 +112,7 @@
                                                 <div class="input-group">
                                                     <span class="input-group-addon"><i class="fa fa-calendar" aria-hidden="true"></i>
                                                     </span>
-                                                    <asp:TextBox runat="server" id="birthday" class="form-control" type="date" value="2000-01-01" placeholder="Birthday"></asp:TextBox>
+                                                    <asp:TextBox runat="server" id="birthday" class="form-control" type="date" placeholder="Birthday" required></asp:TextBox>
                                                 </div><br />
                                                 <div class="input-group">
                                                     <span class="input-group-addon"><i class="glyphicon glyphicon-earphone" aria-hidden="true"></i>
