@@ -64,8 +64,8 @@
                             <label><i class="fa fa-gears fa-fw"></i> Result</label>
                         </div>
                         <!-- /.panel-heading -->
-                                <asp:TextBox ID="TextBoxCompiler" Style="resize:vertical; font-size: 12px; width: 100%; min-height: 150px;" class="form-control"
-                            runat="server" TextMode="MultiLine" Enabled="False"></asp:TextBox>
+                                <asp:TextBox ID="TextBoxCompiler" disabled Style="resize:vertical; font-size: 12px; width: 100%; min-height: 150px;" class="form-control"
+                            runat="server" TextMode="MultiLine"></asp:TextBox>
                         </div>
                     </div>
 
@@ -75,8 +75,8 @@
                             <label><i class="fa fa-arrow-circle-left fa-fw"></i> Output</label>
                         </div>
                         <!-- /.panel-heading -->
-                            <asp:TextBox ID="TextBoxOutput" Style="resize:vertical; font-size: 12px; width: 100%;  min-height: 150px;" class="form-control"
-                            runat="server" TextMode="MultiLine" Enabled="False"></asp:TextBox>
+                            <asp:TextBox ID="TextBoxOutput" disabled Style="resize:vertical; font-size: 12px; width: 100%;  min-height: 150px;" class="form-control"
+                            runat="server" TextMode="MultiLine"></asp:TextBox>
                         </div>
                     </div>
                 </div>
