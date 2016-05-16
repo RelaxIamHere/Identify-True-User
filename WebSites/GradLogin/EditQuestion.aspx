@@ -32,15 +32,15 @@
 
         <div class="panel-footer" style="height:auto; overflow:hidden;">
          <h3><strong><input id="qName" runat="server" class="form-control" type="text" placeholder="Question Name" /></strong></h3>
-        <p><textarea id="qText1" runat="server" class="form-control" type="text" rows="4" placeholder="Question Text" /></p>
+        <p><textarea id="qText1" runat="server" class="form-control" type="text" rows="4" placeholder="Question Text" style="resize:vertical;" /></p>
         <h4>Input</h4>
-        <p><textarea id="qText2" runat="server" class="form-control" type="text" rows="4" placeholder="Input Description Text" /></p>
+        <p><textarea id="qText2" runat="server" class="form-control" type="text" rows="4" placeholder="Input Description Text" style="resize:vertical;" /></p>
         <h4>Output</h4>
-        <p><textarea id="qText3" runat="server" class="form-control" type="text" rows="4" placeholder="Output Description Text" /></p>
+        <p><textarea id="qText3" runat="server" class="form-control" type="text" rows="4" placeholder="Output Description Text" style="resize:vertical;" /></p>
         <h4>Example</h4>
         <pre><strong>Input:</strong>
-        <p><textarea id="qText4" runat="server" class="form-control" type="text" rows="4" placeholder="Example Input" /></p><strong>Output:</strong>
-        <p><textarea id="qText5" runat="server" class="form-control" type="text" rows="4" placeholder="Example Output" /></p>
+        <p><textarea id="qText4" runat="server" class="form-control" type="text" rows="4" placeholder="Example Input" style="resize:vertical;" /></p><strong>Output:</strong>
+        <p><textarea id="qText5" runat="server" class="form-control" type="text" rows="4" placeholder="Example Output" style="resize:vertical;" /></p>
         </pre>
         <button runat="server" id="buttonUpdate" onclick="javascript:updateActive()" class="btn btn-primary btn-sm pull-right">
         Update Question
@@ -62,12 +62,12 @@
                                              <div class="input-group">
                                                 <span class="input-group-addon"><i class="fa fa-arrow-circle-right fa-fw" aria-hidden="true"></i>
                                                 </span>
-                                                <textarea id="editInput" runat="server" class="form-control" rows="3" type="text" placeholder="Input"></textarea>
+                                                <textarea id="editInput" runat="server" class="form-control" rows="3" type="text" placeholder="Input" style="resize:vertical;"></textarea>
                                             </div><br />
                                              <div class="input-group">
                                                 <span class="input-group-addon"><i class="fa fa-arrow-circle-left fa-fw" aria-hidden="true"></i>
                                                 </span>
-                                                <textarea id="editOutput" runat="server" class="form-control" rows="3" type="text" placeholder="Output"></textarea>
+                                                <textarea id="editOutput" runat="server" class="form-control" rows="3" type="text" placeholder="Output" style="resize:vertical;"></textarea>
                                             </div><br />
                                              <div class="input-group">
                                                 <span class="input-group-addon"><i class="fa fa-clock-o fa-fw" aria-hidden="true"></i>
