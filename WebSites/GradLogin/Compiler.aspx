@@ -53,13 +53,8 @@
                             <label><i class="fa fa-arrow-circle-right fa-fw"></i> Input</label>
                         </div>
                         <!-- /.panel-heading -->
-                        
-                        <div class="panel-footer" style="height:auto; overflow:hidden;">
-                                  <div class="col-sm-12" style="margin:0 0 15px 0">
-                                    <asp:TextBox ID="TextBoxInput" Style="font-size: 12px; width: 100%; height: 150px;" class="form-control"
-                                    runat="server" TextMode="MultiLine" Placeholder="Type input here ..."></asp:TextBox>
-                                   </div>  
-                            </div>
+                            <asp:TextBox ID="TextBoxInput" Style="resize:vertical; font-size: 12px; width: 100%; min-height: 150px;" class="form-control"
+                            runat="server" TextMode="MultiLine" Placeholder="Type input here ..."></asp:TextBox>   
                         </div>
                     </div>
 
@@ -69,13 +64,8 @@
                             <label><i class="fa fa-gears fa-fw"></i> Result</label>
                         </div>
                         <!-- /.panel-heading -->
-                        <div class="panel-body" style="height:auto; overflow:hidden;">
-                                  <div class="col-sm-12">
-                                    <asp:TextBox ID="TextBoxCompiler" Style="font-size: 12px; width: 100%; height: 150px;" class="form-control"
-                                runat="server" TextMode="MultiLine" Enabled="False"></asp:TextBox>
-                                </div>
-                                
-                        </div>
+                                <asp:TextBox ID="TextBoxCompiler" Style="resize:vertical; font-size: 12px; width: 100%; min-height: 150px;" class="form-control"
+                            runat="server" TextMode="MultiLine" Enabled="False"></asp:TextBox>
                         </div>
                     </div>
 
@@ -85,12 +75,8 @@
                             <label><i class="fa fa-arrow-circle-left fa-fw"></i> Output</label>
                         </div>
                         <!-- /.panel-heading -->
-                        <div class="panel-body" style="height:auto; overflow:hidden;">
-                            <div class="col-sm-12">
-                                    <asp:TextBox ID="TextBoxOutput" Style="font-size: 12px; width: 100%;  height: 150px;" class="form-control"
-                                    runat="server" TextMode="MultiLine" Enabled="False"></asp:TextBox>
-                            </div>  
-                        </div>
+                            <asp:TextBox ID="TextBoxOutput" Style="resize:vertical; font-size: 12px; width: 100%;  min-height: 150px;" class="form-control"
+                            runat="server" TextMode="MultiLine" Enabled="False"></asp:TextBox>
                         </div>
                     </div>
                 </div>
