@@ -57,15 +57,15 @@
 
 <asp:SqlDataSource ID="ContactDataSource" runat="server"
         ConnectionString="<%$ ConnectionStrings:ApplicationServices %>"
-        SelectCommand="SELECT Name, Surname, Birthday, Phone, Mail, Website, Country, City, Address, Company, School
+        SelectCommand="SELECT Name, Birthday, Phone, Mail, Website, Country, City, Company, School
                        FROM Contact WHERE (Username = @Username)"></asp:SqlDataSource>
 <!-- Progress Bar dolu sutun sayısı -->                 
 <asp:SqlDataSource ID="ContactProgress" runat="server"
         ConnectionString="<%$ ConnectionStrings:ApplicationServices %>"
-        SelectCommand="SELECT cast(((CASE WHEN Name IS NULL THEN 0 ELSE 1 END) + (CASE WHEN Surname IS NULL THEN 0 ELSE 1 END) + (CASE WHEN Birthday IS NULL THEN 0 ELSE 1 END) 
+        SelectCommand="SELECT cast(((CASE WHEN Name IS NULL THEN 0 ELSE 1 END) + (CASE WHEN Birthday IS NULL THEN 0 ELSE 1 END) 
                          + (CASE WHEN Phone IS NULL THEN 0 ELSE 1 END) + (CASE WHEN Mail IS NULL THEN 0 ELSE 1 END) + (CASE WHEN Website IS NULL THEN 0 ELSE 1 END) 
-                         + (CASE WHEN Country IS NULL THEN 0 ELSE 1 END) + (CASE WHEN City IS NULL THEN 0 ELSE 1 END) + (CASE WHEN Address IS NULL THEN 0 ELSE 1 END) 
-                         + (CASE WHEN Company IS NULL AND School IS NULL THEN 0 ELSE 1 END)) as float) AS filled_fields
+                         + (CASE WHEN Country IS NULL THEN 0 ELSE 1 END) + (CASE WHEN City IS NULL THEN 0 ELSE 1 END) 
+                         + (CASE WHEN Company IS NULL THEN 0 ELSE 1 END) + (CASE WHEN School IS NULL THEN 0 ELSE 1 END)) as float) AS filled_fields
                        FROM Contact WHERE (Username = @Username)"></asp:SqlDataSource>
 
 
@@ -181,10 +181,6 @@
                                             <td style="width: 80%;"><%=line["Name"]%></td>
                                         </tr>
                                         <tr>
-                                            <th>Surname:</th>
-                                            <td><%=line["Surname"]%></td>
-                                        </tr>
-                                        <tr>
                                             <th>Age:</th>
                                             <td><% =age%></td>
                                         </tr>
@@ -207,10 +203,6 @@
                                         <tr>
                                             <th>City:</th>
                                             <td><%=line["City"]%></td>
-                                        </tr>
-                                        <tr>
-                                            <th>Address:</th>
-                                            <td><%=line["Address"]%></td>
                                         </tr>
                                         <tr>
                                             <th>Company:</th>
@@ -411,7 +403,7 @@
 						$(this).ElasticProgress("open");
 				},
 				onOpen: function(event) {
-						$(this).ElasticProgress("setValue",x/10);
+						$(this).ElasticProgress("setValue",x/9);
 				},
 				onFail: function(event) {
 						$(this).ElasticProgress("open");

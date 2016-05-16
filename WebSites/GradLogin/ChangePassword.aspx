@@ -5,10 +5,10 @@
 </asp:Content>
 <asp:Content ID="BodyContent" runat="server" ContentPlaceHolderID="MainContent">
 <asp:SqlDataSource ID="ContactDataSource" runat="server" ConnectionString="<%$ ConnectionStrings:ApplicationServices %>"
-         SelectCommand="SELECT Name, Surname, Birthday, Phone, Mail, Website, Country, City, Address, Company, School
+         SelectCommand="SELECT Name, Birthday, Phone, Mail, Website, Country, City, Company, School
                        FROM Contact WHERE (Username = @Username)"
-        InsertCommand="INSERT INTO [Contact] ([Username],[Name],[Surname],[Birthday],[Phone],[Mail],[Website],[Country],[City],[Address],[Company],[School]) VALUES (@Username, @Name, @Surname, @Birthday, @Phone, @Mail, @Website, @Country, @City, @Address, @Company, @School)"
-        UpdateCommand="UPDATE [Contact] SET [Name]=@Name, [Surname]=@Surname, [Birthday]=@Birthday, [Phone]=@Phone, [Mail]=@Mail, [Website]=@Website, [Country]=@Country, [City]=@City, [Address]=@Address, [Company]=@Company, [School]=@School WHERE [Username]=@Username"></asp:SqlDataSource>
+        InsertCommand="INSERT INTO [Contact] ([Username],[Name],[Birthday],[Phone],[Mail],[Website],[Country],[City],[Company],[School]) VALUES (@Username, @Name, @Birthday, @Phone, @Mail, @Website, @Country, @City, @Company, @School)"
+        UpdateCommand="UPDATE [Contact] SET [Name]=@Name, [Birthday]=@Birthday, [Phone]=@Phone, [Mail]=@Mail, [Website]=@Website, [Country]=@Country, [City]=@City, [Company]=@Company, [School]=@School WHERE [Username]=@Username"></asp:SqlDataSource>
 <body>
         <div id="wrapper">
             <div id="page-wrapper">
@@ -105,11 +105,6 @@
                                                     <input runat="server" id="name" class="form-control" type="text" placeholder="Name">
                                                 </div><br />
                                                 <div class="input-group">
-                                                    <span class="input-group-addon"><i class="glyphicon glyphicon-user" aria-hidden="true"></i>
-                                                    </span>
-                                                    <input runat="server" id="surname" class="form-control" type="text" placeholder="Surname">
-                                                </div><br />
-                                                <div class="input-group">
                                                     <span class="input-group-addon"><i class="fa fa-calendar" aria-hidden="true"></i>
                                                     </span>
                                                     <asp:TextBox runat="server" id="birthday" class="form-control" type="date" placeholder="Birthday" required></asp:TextBox>
@@ -117,17 +112,17 @@
                                                 <div class="input-group">
                                                     <span class="input-group-addon"><i class="glyphicon glyphicon-earphone" aria-hidden="true"></i>
                                                     </span>
-                                                    <input runat="server" id="phone" class="form-control" type="text" placeholder="Phone">
+                                                    <asp:TextBox runat="server" id="phone" class="form-control" type="tel" pattern="[0-9]{10}" title="Phone number without beginning 0" placeholder="Phone"></asp:TextBox>
                                                 </div><br />
                                                 <div class="input-group">
                                                     <span class="input-group-addon"><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i>
                                                     </span>
-                                                    <input runat="server" id="mail" class="form-control" type="text" placeholder="E-mail">
+                                                    <asp:TextBox runat="server" id="mail" type="email" class="form-control" placeholder="E-mail"></asp:TextBox>
                                                 </div><br />
                                                 <div class="input-group">
                                                     <span class="input-group-addon"><i class="glyphicon glyphicon-globe" aria-hidden="true"></i>
                                                     </span>
-                                                    <input runat="server" id="website" class="form-control" type="text" placeholder="Website">
+                                                    <asp:TextBox runat="server" id="website" class="form-control" type="url" placeholder="Website"></asp:TextBox>
                                                 </div><br />
                                                 <div class="input-group">
                                                     <span class="input-group-addon"><i class="glyphicon glyphicon-map-marker" aria-hidden="true"></i>
@@ -138,11 +133,6 @@
                                                     <span class="input-group-addon"><i class="glyphicon glyphicon-map-marker" aria-hidden="true"></i>
                                                     </span>
                                                     <input runat="server" id="city" class="form-control" type="text" placeholder="City">
-                                                </div><br />
-                                                <div class="input-group">
-                                                    <span class="input-group-addon"><i class="glyphicon glyphicon-map-marker" aria-hidden="true"></i>
-                                                    </span>
-                                                    <input runat="server" id="address" class="form-control" type="text" placeholder="Address">
                                                 </div><br />
                                                 <div class="input-group">
                                                     <span class="input-group-addon"><i class="fa fa-building" aria-hidden="true"></i>

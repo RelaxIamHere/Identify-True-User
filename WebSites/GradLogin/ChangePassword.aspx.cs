@@ -19,15 +19,13 @@ public partial class _ChangePassword : System.Web.UI.Page
             foreach (System.Data.DataRow line in dv.Table.Rows)
             {
                 name.Value = line["Name"].ToString();
-                surname.Value = line["Surname"].ToString();
                 DateTime dt = (DateTime)line["Birthday"];
                 birthday.Text = dt.ToString("yyyy-MM-dd");
-                phone.Value = line["Phone"].ToString();
-                mail.Value = line["Mail"].ToString();
-                website.Value = line["Website"].ToString();
+                phone.Text = line["Phone"].ToString();
+                mail.Text = line["Mail"].ToString();
+                website.Text = line["Website"].ToString();
                 country.Value = line["Country"].ToString();
                 city.Value = line["City"].ToString();
-                address.Value = line["Address"].ToString();
                 company.Value = line["Company"].ToString();
                 school.Value = line["School"].ToString();
             }
@@ -43,14 +41,12 @@ public partial class _ChangePassword : System.Web.UI.Page
         {
             ContactDataSource.UpdateParameters.Clear();
             ContactDataSource.UpdateParameters.Add("Name", name.Value);
-            ContactDataSource.UpdateParameters.Add("Surname", surname.Value);
             ContactDataSource.UpdateParameters.Add("Birthday", birthday.Text);
-            ContactDataSource.UpdateParameters.Add("Phone", phone.Value);
-            ContactDataSource.UpdateParameters.Add("Mail", mail.Value);
-            ContactDataSource.UpdateParameters.Add("Website", website.Value);
+            ContactDataSource.UpdateParameters.Add("Phone", phone.Text);
+            ContactDataSource.UpdateParameters.Add("Mail", mail.Text);
+            ContactDataSource.UpdateParameters.Add("Website", website.Text);
             ContactDataSource.UpdateParameters.Add("Country", country.Value);
             ContactDataSource.UpdateParameters.Add("City", city.Value);
-            ContactDataSource.UpdateParameters.Add("Address", address.Value);
             ContactDataSource.UpdateParameters.Add("Company", company.Value);
             ContactDataSource.UpdateParameters.Add("School", school.Value);
             ContactDataSource.UpdateParameters.Add("Username", Membership.GetUser().UserName);
@@ -61,14 +57,12 @@ public partial class _ChangePassword : System.Web.UI.Page
             ContactDataSource.InsertParameters.Clear();
             ContactDataSource.InsertParameters.Add("Username", Membership.GetUser().UserName);
             ContactDataSource.InsertParameters.Add("Name", name.Value);
-            ContactDataSource.InsertParameters.Add("Surname", surname.Value);
             ContactDataSource.InsertParameters.Add("Birthday", birthday.Text);
-            ContactDataSource.InsertParameters.Add("Phone", phone.Value);
-            ContactDataSource.InsertParameters.Add("Mail", mail.Value);
-            ContactDataSource.InsertParameters.Add("Website", website.Value);
+            ContactDataSource.InsertParameters.Add("Phone", phone.Text);
+            ContactDataSource.InsertParameters.Add("Mail", mail.Text);
+            ContactDataSource.InsertParameters.Add("Website", website.Text);
             ContactDataSource.InsertParameters.Add("Country", country.Value);
             ContactDataSource.InsertParameters.Add("City", city.Value);
-            ContactDataSource.InsertParameters.Add("Address", address.Value);
             ContactDataSource.InsertParameters.Add("Company", company.Value);
             ContactDataSource.InsertParameters.Add("School", school.Value);
             ContactDataSource.Insert();
