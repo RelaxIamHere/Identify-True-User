@@ -165,7 +165,9 @@
                                     <div role="button" tabindex="0" aria-label="Download" class="Download" data-progressbar-label="Profile Progress..."></div>
                                     </div>
                                     <div class="col-sm-2 pull-right">
+                                    <%if (username == Membership.GetUser().UserName){%>
                                     <a href="ChangePassword.aspx" class="btn btn-primary"><i class="fa fa-user fa-fw"></i> Update</a>
+                                    <% }%>
                                     </div>
                                 </div>
                                 <div class="col-sm-12">
