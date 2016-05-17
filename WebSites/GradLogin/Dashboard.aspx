@@ -164,8 +164,8 @@
                                     <div class="col-sm-10">
                                     <div role="button" tabindex="0" aria-label="Download" class="Download" data-progressbar-label="Profile Progress..."></div>
                                     </div>
-                                    <div class="col-sm-2">
-                                    <a style="float:right" href="ChangePassword.aspx" class="btn btn-primary">Update</a>
+                                    <div class="col-sm-2 pull-right">
+                                    <a href="ChangePassword.aspx" class="btn btn-primary"><i class="fa fa-user fa-fw"></i> Update</a>
                                     </div>
                                 </div>
                                 <div class="col-sm-12">

@@ -89,7 +89,10 @@ public partial class _Challange : System.Web.UI.Page
                     testCases="";
                     for (int i = 0; i < resultObj["result_array"].Count; i++)
                     {
-                        testCases += "<h5><a href=\"#\"><label><i class=\"fa fa-keyboard-o fa-fw\"></i> Testcase " + (i + 1).ToString() + "</label></a></h5><div class=\"no-padding\" style=\"border:0;\">";
+                        string passed = "fa-check";
+                        if (resultObj["result_array"][i]["statusDescription"] != "accepted")
+                            passed = "fa-close";
+                        testCases += "<h5><a href=\"#\"><label><i class=\"fa "+passed+" fa-fw\"></i> Testcase " + (i + 1).ToString() + "</label></a></h5><div class=\"no-padding\" style=\"border:0;\">";
                         testCases += "<table aria-describedby=\"dataTables-example_info\" role=\"grid\"" +
                                         "class=\"table table-responsive table-striped table-bordered table-hover dataTable no-footer dtr-inline\""+
                                         "width=\"100%\"><tbody>";
