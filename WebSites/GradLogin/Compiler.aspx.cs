@@ -12,14 +12,15 @@ public partial class _Compiler : System.Web.UI.Page
         private string token = "79a33a949a690966cbe4b9d6fe226356";
         private WebClient client = new WebClient();
         private string response = "";
-        public static List<string> languageId;
+        public static List<string> languageId = new List<string>();
+        public string output="";
         
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
             {
                 DropDownLanguage.Attributes.Add("onchange", "fillSampleCode();");
-                languageId = new List<string>();
+                languageId.Clear();
                 var jss = new JavaScriptSerializer();
                 string url = "http://api.compilers.sphere-engine.com/api/v3/languages?access_token=" + token;
                 response = client.DownloadString(url);
@@ -54,35 +55,50 @@ public partial class _Compiler : System.Web.UI.Page
                 var resultObj = jss.Deserialize<Dictionary<string, string>>(response);
                 if (resultObj["status"] == "0")
                 {
+                    output = "";
                     finished = true;
-                    TextBoxCompiler.Text = "";
+                    compInfo.InnerHtml = "";
+                    compInfo.InnerHtml = "<table aria-describedby=\"dataTables-example_info\" role=\"grid\""+
+                                        "class=\"table table-responsive table-striped table-bordered table-hover dataTable no-footer dtr-inline\""+
+                                        "width=\"100%\"><tbody>";
                     foreach (KeyValuePair<string, string> status in resultObj)
                     {
                         if (status.Key != "source" && status.Key != "public" && status.Key != "error"
                             && status.Key != "langId" && status.Key != "date" && status.Key != "status"
                             && status.Key != "input" && status.Key != "result" && status.Value != "" && status.Key != "output")
-                            TextBoxCompiler.Text += status.Key + ": " + status.Value + "\n";
+                            compInfo.InnerHtml += "<tr role=\"row\" class=\"gradeA odd\"><td><label>"+status.Key+"</label></td><td>" + status.Value + "</td></tr>";
+
                         if (status.Key == "output")
-                            TextBoxOutput.Text = status.Value;
+                        {
+                            output += "<h5><a href=\"#\"><label><i class=\"fa fa-gear fa-fw\"></i>Output </label></a></h5><div class=\"no-padding\" style=\"border:0;\">";
+                            output += "<table aria-describedby=\"dataTables-example_info\" role=\"grid\"" +
+                                            "class=\"table table-responsive table-striped table-bordered table-hover dataTable no-footer dtr-inline\"" +
+                                            "width=\"100%\"><tbody>";
+                            output += "<tr role=\"row\" class=\"gradeA odd\"><td><label>Stdout</label></td><td>" + status.Value + "</td></tr>";
+                            output += "</tbody></table></div>";
+                        }
                         if (status.Key == "result")
                         {
-                            TextBoxCompiler.Text += status.Key + ": ";
+                            compInfo.InnerHtml += "<tr role=\"row\" class=\"gradeA odd\"><td><label>" + status.Key + "</label></td><td>";
                             if (status.Value == "11")
-                                TextBoxCompiler.Text += "Compilation Error\n";
+                                compInfo.InnerHtml += "Compilation Error";
                             if (status.Value == "12")
-                                TextBoxCompiler.Text += "Runtime Error\n";
+                                compInfo.InnerHtml += "Runtime Error";
                             if (status.Value == "13")
-                                TextBoxCompiler.Text += "Time Limit Exceeded\n";
+                                compInfo.InnerHtml += "Time Limit Exceeded";
                             if (status.Value == "15")
-                                TextBoxCompiler.Text += "Success\n";
+                                compInfo.InnerHtml += "Success";
                             if (status.Value == "17")
-                                TextBoxCompiler.Text += "Memory Limit Exceeded\n";
+                                compInfo.InnerHtml += "Memory Limit Exceeded";
                             if (status.Value == "19")
-                                TextBoxCompiler.Text += "Illegal System Call\n";
+                                compInfo.InnerHtml += "Illegal System Call";
                             if (status.Value == "20")
-                                TextBoxCompiler.Text += "Internal Error\n";
+                                compInfo.InnerHtml += "Internal Error";
+
+                            compInfo.InnerHtml +="</td></tr>";
                         }
                     }
+                    compInfo.InnerHtml+="</tbody></table>";
                 }
             }
         }

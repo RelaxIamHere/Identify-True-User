@@ -47,15 +47,10 @@
         </div>
         <div id="wrapper" class="no-padding">
             <div id="page-wrapper" class="no-padding">
-
             <div id="tabs-center" class="full-height ui-layout-center add-scrollbar no-padding" style="border: 0; min-width:500px;">
 	            <div class="ui-layout-center ui-widget-content add-scrollbar no-padding" style="border: 0; overflow-x:hidden; max-width:100%;">
-                    <div class="col-lg-12">
-                        <h1 class="page-header">
-                            Test Compiler</h1>
-                    </div>
-                    <!-- /.col-lg-12 -->
 		            <div class="col-lg-12">
+                    <br /><br />
                         <div class="panel panel-default">
                         <div class="panel-heading">
                             <label><i class="fa fa-keyboard-o fa-fw"></i> Code</label>
@@ -77,12 +72,11 @@
 
             <div id="tabs-east" class="ui-layout-east no-padding add-scrollbar">
 	            <div class="ui-widget-header no-scrollbar add-padding" style="margin: 0 1px;">
-		            TABS HEADER
+		            Test Compiler
 	            </div>
 	            <ul class="allow-overflow">
 		            <li><a href="#tab-panel-east-1"><label><i class="fa fa-arrow-circle-right fa-fw"></i> Input</label></a></li>
 		            <li><a href="#tab-panel-east-2"><label><i class="fa fa-gears fa-fw"></i> Result</label></a></li>
-		            <li><a href="#tab-panel-east-3"><label><i class="fa fa-arrow-circle-left fa-fw"></i> Output</label></a></li>
 	            </ul>
 	            <div class="ui-layout-content ui-widget-content no-scrollbar" style="border-top: 0;">
 		            <div id="tab-panel-east-1" class="full-height no-padding add-scrollbar">
@@ -93,34 +87,16 @@
 
 			            </div>
 		            </div>
-		            <div id="tab-panel-east-3" class="full-height no-padding add-scrollbar">
-			            <div class="ui-tabs-panel">
-                            <asp:TextBox ID="TextBoxCompiler" disabled Style="resize:vertical; font-size: 12px; width: 100%; min-height: 300px;" class="form-control"
-                            runat="server" TextMode="MultiLine"></asp:TextBox>
-
-			            </div>
-		            </div>
 
 		            <div id="tab-panel-east-2" class="full-height add-padding add-scrollbar">
-			            <div id="accordion-east" class="full-height">
+			            <div id="accordion-east" class="full-height no-padding">
 		
-					            <h4><a href="#">Section 1</a></h4>
-					            <div>
-	
-                                    <asp:TextBox ID="TextBoxOutput" disabled Style="resize:vertical; font-size: 12px; width: 100%;  min-height: 300px;" class="form-control"
-                                    runat="server" TextMode="MultiLine"></asp:TextBox>
+					            <h5><a href="#"><label><i class="fa fa-gear fa-fw"></i>Compile Info</label></a></h5>
+					            <div class="no-padding" style="border:0;">
+                                    <span runat="server" id="compInfo"></span>
+					            </div>
 
-					            </div>
-		
-					            <h4><a href="#">Section 2</a></h4>
-					            <div>
-						            //text 2
-					            </div>
-		
-					            <h4><a href="#">Section 3</a></h4>
-					            <div>
-						            //text 3
-					            </div>
+                                <%=output%>     
 			            </div>
 		            </div>
 	            </div>
@@ -140,7 +116,7 @@
                 document.getElementById("overlay").style.height = "100%";
             }
     </script>
-
+    <!--layout-->
     <script type="text/javascript" src="js/jquery-ui.js"></script> 
 	<script type="text/javascript" src="js/jquery.layout.js"></script>
 
@@ -149,7 +125,7 @@
 	<script type="text/javascript" src="js/jquery.layout.resizePaneAccordions.js"></script>
 
 	<script type="text/javascript">
-
+	    var repeat=0;
 	    $(document).ready(function () {
 	        // alias callback for convenience
 	        resizePaneAccordions = $.layout.callbacks.resizePaneAccordions;
@@ -185,10 +161,15 @@
 	        // INIT ALL ACCORDIONS - EVEN THOSE NOT VISIBLE
 
 	        $("#accordion-east").accordion({ heightStyle: "fill" });
-	        setTimeout(pageLayout.resizeAll, 100); /* allow time for browser to re-render with new theme */
-	        setTimeout(pageLayout.resizeAll, 200); /* allow time for browser to re-render with new theme */
-	        setTimeout(pageLayout.resizeAll, 500); /* allow time for browser to re-render with new theme */
+	        setTimeout(resize, 50); /* allow time for browser to re-render with new theme */
 	    });
+
+	    function resize() {
+	        setTimeout(pageLayout.resizeAll, 50);
+	        repeat++;
+            if (repeat<10)
+                setTimeout(resize, 50);
+        }
 
 	</script> 
     

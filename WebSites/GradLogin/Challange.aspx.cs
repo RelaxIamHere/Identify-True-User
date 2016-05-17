@@ -14,7 +14,8 @@ public partial class _Challange : System.Web.UI.Page
         private string token = "ff0c267afe82cc51624b466b14483fea2c4422ec";
         private WebClient client = new WebClient();
         private string response = "";
-        public static List<string> languageId;
+        public static List<string> languageId = new List<string>();
+        public string testCases="";
         
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -22,18 +23,10 @@ public partial class _Challange : System.Web.UI.Page
             if (!Page.IsPostBack)
             {
                 if (string.IsNullOrEmpty(Request.QueryString["p"]))
-                    Response.Redirect("Default.aspx");
-
-                MapDataSource.SelectParameters.Clear(); //Select
-                MapDataSource.SelectParameters.Add("Question", Request.QueryString["p"]);
-                DataSourceSelectArguments args = new DataSourceSelectArguments();
-                DataView dv = (DataView)MapDataSource.Select(args);
-                if (dv.Table.Rows[0]["Category"].ToString() != "Contest")
-                    header.InnerHtml = "Category: " + dv.Table.Rows[0]["Category"].ToString();
-                
+                    Response.Redirect("Default.aspx");                
 
                 DropDownLanguage.Attributes.Add("onchange", "fillSampleCode();");
-                languageId = new List<string>();
+                languageId.Clear(); 
                 var jss = new JavaScriptSerializer();
                 string url = "http://2d73b8c2.problems.sphere-engine.com/api/v3/compilers?access_token=" + token;
                 response = client.DownloadString(url);
@@ -52,8 +45,8 @@ public partial class _Challange : System.Web.UI.Page
                 SubmissionDataSource.SelectParameters.Clear(); //Select
                 SubmissionDataSource.SelectParameters.Add("Question", Request.QueryString["p"]);
                 SubmissionDataSource.SelectParameters.Add("Username", Membership.GetUser().UserName);
-                args = new DataSourceSelectArguments();
-                dv = (DataView)SubmissionDataSource.Select(args);
+                DataSourceSelectArguments args = new DataSourceSelectArguments();
+                DataView dv = (DataView)SubmissionDataSource.Select(args);
                 if (dv.Table.Rows.Count == 1)
                 {
                     string submissionId = dv.Table.Rows[0]["SubmissionId"].ToString();
@@ -93,49 +86,55 @@ public partial class _Challange : System.Web.UI.Page
                 if (resultObj["status"] > 10)
                 {
                     finished = true;
-                    TextBoxCompiler.Text = "";
-                    TextBoxOutput.Text = "";
-                    if (resultObj["result_stdout"].Contains("DATASET NUMBER: 0"))
-                        TextBoxOutput.Text = resultObj["result_stdout"].Split('\n')[2];
-
-                    TextBoxScore.Text = "SCORE: " + resultObj["result_score"];
-
+                    testCases="";
                     for (int i = 0; i < resultObj["result_array"].Count; i++)
                     {
-                        TextBoxScore.Text += "\n\nTEST CASE: " + (i + 1).ToString();
-                        TextBoxScore.Text += "\ntime: " + resultObj["result_array"][i]["time"];
-                        TextBoxScore.Text += "\nmemory: " + resultObj["result_array"][i]["memory"];
-                        TextBoxScore.Text += "\nstatus: " + resultObj["result_array"][i]["statusDescription"];
+                        testCases += "<h5><a href=\"#\"><label><i class=\"fa fa-keyboard-o fa-fw\"></i> Testcase " + (i + 1).ToString() + "</label></a></h5><div class=\"no-padding\" style=\"border:0;\">";
+                        testCases += "<table aria-describedby=\"dataTables-example_info\" role=\"grid\"" +
+                                        "class=\"table table-responsive table-striped table-bordered table-hover dataTable no-footer dtr-inline\""+
+                                        "width=\"100%\"><tbody>";
+                        if (i==0 && resultObj["result_stdout"].Contains("DATASET NUMBER: 0"))
+                            testCases += "<tr role=\"row\" class=\"gradeA odd\"><td><label>Output</label></td><td>" + resultObj["result_stdout"].Split('\n')[2] + "</td></tr>";
+                        testCases += "<tr role=\"row\" class=\"gradeA odd\"><td><label>Time</label></td><td>" + resultObj["result_array"][i]["time"] + "</td></tr>";
+                        testCases += "<tr role=\"row\" class=\"gradeA odd\"><td><label>Memory</label></td><td>" + resultObj["result_array"][i]["memory"] + "</td></tr>";
+                        testCases += "<tr role=\"row\" class=\"gradeA odd\"><td><label>Status</label></td><td>" + resultObj["result_array"][i]["statusDescription"] + "</td></tr>";
+                        testCases += "</tbody></table></div>";
                     }
 
-                    TextBoxCompiler.Text = "";
-                    TextBoxCompiler.Text += "langName: " + resultObj["compiler"]["name"];
-                    TextBoxCompiler.Text += "\ntime: " + resultObj["result_time"];
-                    TextBoxCompiler.Text += "\nmemory: " + resultObj["result_memory"];
-                    TextBoxCompiler.Text += "\nsignal: " + resultObj["result_signal"];
+
+                    compInfo.InnerHtml = "<table aria-describedby=\"dataTables-example_info\" role=\"grid\""+
+                                        "class=\"table table-responsive table-striped table-bordered table-hover dataTable no-footer dtr-inline\""+
+                                        "width=\"100%\"><tbody>";
+                    compInfo.InnerHtml += "<tr role=\"row\" class=\"gradeA odd\"><td><label>Score</label></td><td>" + resultObj["result_score"] + "</td></tr>";
+                    compInfo.InnerHtml += "<tr role=\"row\" class=\"gradeA odd\"><td><label>LangName</label></td><td>" + resultObj["compiler"]["name"] + "</td></tr>";
+                    compInfo.InnerHtml += "<tr role=\"row\" class=\"gradeA odd\"><td><label>Time</label></td><td>" + resultObj["result_time"] + "</td></tr>";
+                    compInfo.InnerHtml += "<tr role=\"row\" class=\"gradeA odd\"><td><label>Memory</label></td><td>" + resultObj["result_memory"] + "</td></tr>";
+                    compInfo.InnerHtml += "<tr role=\"row\" class=\"gradeA odd\"><td><label>Signal</label></td><td>" + resultObj["result_signal"] + "</td></tr>";
 
                     if (resultObj["result_cmperr"] != "")
-                        TextBoxCompiler.Text += "\ncmperr: " + resultObj["result_cmperr"];
+                        compInfo.InnerHtml += "<tr role=\"row\" class=\"gradeA odd\"><td><label>Compile Error</label></td><td>" + resultObj["result_cmperr"] + "</td></td>";
 
-                    TextBoxCompiler.Text += "\nstatus: " + resultObj["statusDescription"];
+                    compInfo.InnerHtml += "<tr role=\"row\" class=\"gradeA odd\"><td><label>Status</label></td><td>" + resultObj["statusDescription"] + "</td></tr>";
 
-                    TextBoxCompiler.Text += "\nresult: ";
+                    compInfo.InnerHtml += "<tr role=\"row\" class=\"gradeA odd\"><td><label>Result</label></td><td>";
                     if (resultObj["status"] == 11)
-                        TextBoxCompiler.Text += "Compilation Error\n";
+                        compInfo.InnerHtml += "Compilation Error";
                     if (resultObj["status"] == 12)
-                        TextBoxCompiler.Text += "Runtime Error\n";
+                        compInfo.InnerHtml += "Runtime Error";
                     if (resultObj["status"] == 13)
-                        TextBoxCompiler.Text += "Time Limit Exceeded\n";
+                        compInfo.InnerHtml += "Time Limit Exceeded";
                     if (resultObj["status"] == 14)
-                        TextBoxCompiler.Text += "Wrong Answer\n";
+                        compInfo.InnerHtml += "Wrong Answer";
                     if (resultObj["status"] == 15)
-                        TextBoxCompiler.Text += "Success\n";
+                        compInfo.InnerHtml += "Success";
                     if (resultObj["status"] == 17)
-                        TextBoxCompiler.Text += "Memory Limit Exceeded\n";
+                        compInfo.InnerHtml += "Memory Limit Exceeded";
                     if (resultObj["status"] == 19)
-                        TextBoxCompiler.Text += "Illegal System Call\n";
+                        compInfo.InnerHtml += "Illegal System Call";
                     if (resultObj["status"] == 20 || resultObj["status"] == 21)
-                        TextBoxCompiler.Text += "Internal Error\n";
+                        compInfo.InnerHtml += "Internal Error";
+
+                    compInfo.InnerHtml += "</td></tr></tbody></table>";
 
                     Page.ClientScript.RegisterStartupScript(this.GetType(), "init", "g1.refresh(" + resultObj["result_score"] + ")", true);
 
