@@ -24,7 +24,9 @@
             <div class="row">
                 <div style="right:5px; position:absolute; overflow:hidden;">
                         <br />   
-                        <div id="g1" style="height:100px; width:100px;"></div>
+                        <a href="Leaderboard.aspx?c=<%= Request.QueryString["c"]%>">
+                            <div id="g1" style="height:100px; width:100px;"></div>
+                        </a>
                     </div>
 
                 <div class="col-lg-12" style="width:75%; float:left">

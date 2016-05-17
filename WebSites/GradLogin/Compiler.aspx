@@ -61,7 +61,7 @@
                         <!-- /.panel-heading -->
                         <asp:TextBox ID="TextBoxCode" class="form-control" runat="server" TextMode="MultiLine"></asp:TextBox>
                         <div class="panel-footer" style="height:auto; overflow:hidden;">
-                            <asp:LinkButton  ID="ButtonCompile" class="btn btn-primary pull-right" runat="server"
+                            <asp:LinkButton  ID="ButtonCompile" class="btn btn-primary btn-outline pull-right" runat="server"
                             OnClick="ButtonCompile_Click" OnClientClick="openOverlay()"><i class='fa fa-gear fa-fw'></i> Compile</asp:LinkButton >
                         </div>
                         </div>
