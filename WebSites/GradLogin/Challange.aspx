@@ -228,7 +228,7 @@
 	    function resize() {
 	        setTimeout(pageLayout.resizeAll, 50);
 	        repeat++;
-	        if (repeat < 10)
+	        if (repeat < 20)
 	            setTimeout(resize, 50);
 	        else
 	            closeOverlay();
