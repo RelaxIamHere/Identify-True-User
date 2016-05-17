@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head> 
+	<title>Accordions and Tabs</title> 
+
+	<link rel="stylesheet" type="text/css" href="../source/stable/layout-default.css">
+
+	<style type="text/css">
+
+	/* neutralize pane formatting BEFORE loading UI Theme */
+	.ui-layout-pane ,
+	.ui-layout-content {
+		background:	none;
+		border:		0;
+		padding:	0;
+		overflow:	visible;
+	}
+
+
+	p				{ margin:		1em 0; }
+
+	/* use !important to override UI theme styles */
+	.grey			{ background:	#999 !important; }
+	.outline		{ /*border:		1px dashed #F00 !important;*/ }
+	.add-padding	{ padding:		10px !important; }
+	.no-padding		{ padding:		0 !important; }
+	.add-scrollbar	{ overflow:		auto; }
+	.no-scrollbar	{ overflow:		hidden; }
+	.allow-overflow	{ overflow:		visible; }
+	.full-height	{ height:		100%; }
+	button			{ cursor:		pointer; }
+
+	</style>
+
+	<link rel="stylesheet" type="text/css" href="css/themes/smoothness/jquery-ui.css">
+
+
+	<script type="text/javascript" src="js/jquery.js"></script> 
+	<script type="text/javascript" src="js/jquery-ui.js"></script> 
+	<script type="text/javascript" src="../source/stable/jquery.layout.js"></script>
+
+	<!-- load the Tabs & Accordions callbacks so we can use them below-->
+	<script type="text/javascript" src="../source/stable/callbacks/jquery.layout.resizeTabLayout.js"></script>
+	<script type="text/javascript" src="../source/stable/callbacks/jquery.layout.resizePaneAccordions.js"></script>
+
+	<script type="text/javascript"> 
+
+	$(document).ready(function(){
+		// alias callback for convenience
+		resizePaneAccordions	= $.layout.callbacks.resizePaneAccordions;
+		resizeTabLayout			= $.layout.callbacks.resizeTabLayout;
+
+		// OUTER/PAGE LAYOUT
+		pageLayout = $("body").layout({ // DO NOT use "var pageLayout" here
+			east__size:			.30 
+		,	east__onresize:		resizePaneAccordions // east accordion nested inside a tab-panel
+		}); 
+
+		// TABS IN CENTER-PANE
+		// create tabs before wrapper-layout so elems are correct size before creating layout
+		pageLayout.panes.center.tabs({
+			activate:			resizeTabLayout // tab2-accordion is wrapped in a layout
+		});
+
+		// WRAPPER-LAYOUT FOR TABS/TAB-PANELS, INSIDE OUTER-CENTER PANE
+		pageLayout.panes.center.layout({
+			closable:			false
+		,	resizable:			false
+		,	spacing_open:		0
+		,	center__onresize:	resizeTabLayout // tabs/panels are wrapped with an inner-layout
+		});
+
+		// TABS INSIDE EAST-PANE
+		pageLayout.panes.east.tabs({
+			activate:			resizePaneAccordions // resize tab2-accordion when tab is activated
+		});
+		pageLayout.sizeContent("east"); // resize pane-content-elements after creating east-tabs
+
+		// INIT ALL ACCORDIONS - EVEN THOSE NOT VISIBLE
+		$("#accordion-center")	.accordion({ heightStyle: "fill" });
+		$("#accordion-east")	.accordion({ heightStyle: "fill" });
+
+
+		setTimeout( pageLayout.resizeAll, 2000 ); /* allow time for browser to re-render with new theme */
+	});
+
+	</script> 
+    
+</head> 
+<body> 
+<div id="tabs-center" class="ui-layout-center add-scrollbar add-padding grey">
+	<div class="ui-layout-center ui-widget-content add-scrollbar" style="border-top: 0;">
+		//Compiler</br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br>asdasdas</br></br></br></br></br></br></br></br></br></br></br></br>asdsad</br></br></br></br></br></br>asdasd</br></br></br></br></br></br></br>asdsa
+	</div>
+</div>
+
+
+<div id="tabs-east" class="ui-layout-east no-padding no-scrollbar">
+	<div class="ui-widget-header no-scrollbar add-padding" style="margin: 0 1px;">
+		TABS HEADER
+	</div>
+	<UL class="allow-overflow">
+		<LI><a href="#tab-panel-east-1">Tab 1</a></LI>
+		<LI><a href="#tab-panel-east-2">Tab 2</a></LI>
+		<LI><a href="#tab-panel-east-3">Tab 3</a></LI>
+	</UL>
+	<div class="ui-layout-content ui-widget-content no-scrollbar" style="border-top: 0;">
+		<div id="tab-panel-east-1" class="full-height no-padding add-scrollbar">
+			<div class="ui-tabs-panel outline">
+				//text 1
+			</div>
+		</div>
+		<div id="tab-panel-east-3" class="full-height no-padding add-scrollbar">
+			<div class="ui-tabs-panel outline">
+				//text 2
+			</div>
+		</div>
+		<div id="tab-panel-east-2" class="full-height no-padding no-scrollbar">
+			<div id="accordion-east" class="full-height">
+		
+					<H3><a href="#">Section 1</a></H3>
+					<div>
+						//text 1
+					</div>
+		
+					<H3><a href="#">Section 2</a></H3>
+					<div>
+						//text 2
+					</div>
+		
+					<H3><a href="#">Section 3</a></H3>
+					<div>
+						//text 3
+					</div>
+		
+					<H3><a href="#">Section 4</a></H3>
+					<div>
+						//text 4
+					</div>
+		
+			</div>
+		</div>
+	</div>
+</div>
+
+
+</body> 
+</html>
