@@ -109,16 +109,15 @@
 	            <div class="ui-layout-content ui-widget-content no-scrollbar" style="border-top: 0;">
 		            <div id="tab-panel-east-1" class="full-height no-padding add-scrollbar">
 			            <div class="ui-tabs-panel">
-                            <div style="float:right;">
+                            
+                            <div class="pull-right" style="right:10px; top:0;">
                                 <br />
                                 <a href="Leaderboard.aspx?p=<%=Request.QueryString["p"]%>">
                                     <div id="g1" style="height:100px; width:100px;"></div>
                                 </a>
                             </div>
-
-                            <div runat="server" id="problem" style="width: 80%; border-left-color: #5bc0de; padding: 20px; margin: 0 auto;
-                                border: 1px solid #eee; border-left-width: 5px; border-radius: 3px;"></div>
-
+                            <div runat="server" id="problem" style="width: 100%; border-left-color: #5bc0de; padding: 20px; margin: 0 auto;
+                                border: 2px solid #eee; border-left-width: 8px; border-radius: 50px;"></div>
 			            </div>
 		            </div>
 
