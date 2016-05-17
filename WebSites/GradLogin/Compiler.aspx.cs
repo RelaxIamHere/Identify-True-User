@@ -68,7 +68,7 @@ public partial class _Compiler : System.Web.UI.Page
                             && status.Key != "input" && status.Key != "result" && status.Value != "" && status.Key != "output")
                             compInfo.InnerHtml += "<tr role=\"row\" class=\"gradeA odd\"><td><label>"+status.Key+"</label></td><td>" + status.Value + "</td></tr>";
 
-                        if (status.Key == "output")
+                        if (status.Key == "output" && status.Value!="")
                         {
                             output += "<h5><a href=\"#\"><label><i class=\"fa fa-gear fa-fw\"></i>Output </label></a></h5><div class=\"no-padding\" style=\"border:0;\">";
                             output += "<table aria-describedby=\"dataTables-example_info\" role=\"grid\"" +
