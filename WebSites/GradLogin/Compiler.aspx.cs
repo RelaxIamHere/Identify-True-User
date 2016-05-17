@@ -81,11 +81,7 @@ public partial class _Compiler : System.Web.UI.Page
                         if (status.Key == "output" && status.Value!="")
                         {
                             output += "<h5><a href=\"#\"><label><i class=\"fa fa-gear fa-fw\"></i>Output </label></a></h5><div class=\"no-padding\" style=\"border:0;\">";
-                            output += "<table aria-describedby=\"dataTables-example_info\" role=\"grid\"" +
-                                            "class=\"table table-responsive table-striped table-bordered table-hover dataTable no-footer dtr-inline\"" +
-                                            "width=\"100%\"><tbody>";
-                            output += "<tr role=\"row\" class=\"gradeA odd\"><td><label>Stdout</label></td><td>" + status.Value + "</td></tr>";
-                            output += "</tbody></table></div>";
+                            output += "<label>"+status.Value+"</label></div>";
                         }
                         if (status.Key == "result")
                         {

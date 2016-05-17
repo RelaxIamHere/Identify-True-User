@@ -9,7 +9,7 @@ function init(postBack) {
                         theme: "ambiance"
                     }
                 );
-    editor.setSize("", 350);
+    editor.setSize("", 410);
     editor.display.wrapper.style.fontSize = "12px";
     setMode();
     if (postBack == 0)
