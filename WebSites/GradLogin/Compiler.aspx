@@ -10,6 +10,7 @@
     <link href="Styles/overlay.css" rel="stylesheet" type="text/css" />
     <!-- layout-->
     <link rel="stylesheet" type="text/css" href="Styles/layout-default.css">
+    
     <style type="text/css">
 
 	/* neutralize pane formatting BEFORE loading UI Theme */
@@ -23,6 +24,7 @@
 
 	/* use !important to override UI theme styles */
 	.add-padding	{ padding:		10px !important; }
+	.absolute       { background-color: rgba(0,0,0, 1);}
 	.no-padding		{ padding:		0 !important; }
 	.add-scrollbar	{ overflow:		auto !important;}
 	.no-scrollbar	{ overflow:		hidden !important; }
@@ -31,13 +33,19 @@
 	button			{ cursor:		pointer; }
 
 	</style>
+    
     <link rel="stylesheet" type="text/css" href="Styles/jquery-ui.css">
     
     </head>
 </asp:Content>
 <asp:Content ID="BodyContent" runat="server" ContentPlaceHolderID="MainContent">
     <body class="no-scrollbar">
-        <div id="overlay" class="overlay">
+        
+        
+        <div id="wrapper" class="no-padding">
+            <div id="page-wrapper" class="no-padding">
+
+        <div id="overlay" class="overlay" style="height:0%;">
             <div class="overlay-content">
                 <a href="javascript:void(0);">
                     <image src="Styles/comp.gif"></image>
@@ -45,8 +53,16 @@
                 <a href="javascript:void(0);"> Please Wait ...</a>
             </div>
         </div>
-        <div id="wrapper" class="no-padding">
-            <div id="page-wrapper" class="no-padding">
+
+        <div id="overlay2" class="overlay absolute"  style="height:100%;">
+            <div class="overlay-content">
+                <a href="javascript:void(0);">
+                    <image src="Styles/comp.gif" style="visibility:hidden;"></image>
+                </a>
+                <a href="javascript:void(0);"> Please Wait ...</a>
+            </div>
+        </div>
+
             <div id="tabs-center" class="full-height ui-layout-center add-scrollbar no-padding" style="border: 0; min-width:500px;">
 	            <div class="ui-layout-center ui-widget-content add-scrollbar no-padding" style="border: 0; overflow-x:hidden; max-width:100%;">
 		            <div class="col-lg-12">
@@ -115,6 +131,9 @@
             function openOverlay() {
                 document.getElementById("overlay").style.height = "100%";
             }
+            function closeOverlay() {
+                document.getElementById("overlay2").style.height = "0%";
+            }
     </script>
     <!--layout-->
     <script type="text/javascript" src="js/jquery-ui.js"></script> 
@@ -167,8 +186,10 @@
 	    function resize() {
 	        setTimeout(pageLayout.resizeAll, 50);
 	        repeat++;
-            if (repeat<10)
-                setTimeout(resize, 50);
+	        if (repeat < 10)
+	            setTimeout(resize, 50);
+	        else
+	            closeOverlay();
         }
 
 	</script> 
