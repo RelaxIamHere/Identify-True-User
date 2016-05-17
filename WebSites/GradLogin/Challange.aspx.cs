@@ -68,7 +68,16 @@ public partial class _Challange : System.Web.UI.Page
         protected void ButtonCompile_Click(object sender, EventArgs e)
         {
             var jss = new JavaScriptSerializer();
-            string url = "http://2d73b8c2.problems.sphere-engine.com/api/v3/submissions?access_token=" + token;
+            string url = "http://2d73b8c2.problems.sphere-engine.com/api/v3/compilers?access_token=" + token;
+            if (languageId.Count == 0)
+            {
+                response = client.DownloadString(url);
+                var langObj = jss.Deserialize<Dictionary<string, dynamic>>(response);
+                for (int i = 0; i < langObj["items"].Count; i++)
+                    languageId.Add(langObj["items"][i]["id"].ToString());
+            }
+
+            url = "http://2d73b8c2.problems.sphere-engine.com/api/v3/submissions?access_token=" + token;
             string code = TextBoxCode.Text;
             var json = jss.Serialize(code);
             string jsonData = "{\"compilerId\":" + languageId[DropDownLanguage.SelectedIndex] + ",\"source\":" + json + ",\"problemCode\":\"" + Request.QueryString["p"] + "\"}";

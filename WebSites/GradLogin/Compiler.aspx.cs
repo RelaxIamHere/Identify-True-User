@@ -38,7 +38,17 @@ public partial class _Compiler : System.Web.UI.Page
         protected void ButtonCompile_Click(object sender, EventArgs e)
         {
             var jss = new JavaScriptSerializer();
-            string url = "http://api.compilers.sphere-engine.com/api/v3/submissions?access_token=" + token;
+            string url = "http://api.compilers.sphere-engine.com/api/v3/languages?access_token=" + token;
+            if (languageId.Count == 0)
+            {
+                jss = new JavaScriptSerializer();
+                response = client.DownloadString(url);
+                var langObj = jss.Deserialize<Dictionary<string, string>>(response);
+                foreach (KeyValuePair<string, string> language in langObj)
+                    languageId.Add(language.Key);
+            }
+            
+            url = "http://api.compilers.sphere-engine.com/api/v3/submissions?access_token=" + token;
             var input = jss.Serialize(TextBoxInput.Text);
             var code = jss.Serialize(TextBoxCode.Text);
             string jsonData = "{\"language\":" + languageId[DropDownLanguage.SelectedIndex] + ",\"sourceCode\":" + code + ",\"input\":" + input + "}";
