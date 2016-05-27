@@ -54,7 +54,7 @@ public partial class _Challange : System.Web.UI.Page
                     response = client.DownloadString(url);
                     var oldSubmission = jss.Deserialize<Dictionary<string, dynamic>>(response);
                     TextBoxCode.Text = oldSubmission["source"];
-                    DropDownLanguage.SelectedIndex = oldSubmission["language"] - 1;
+                    DropDownLanguage.SelectedIndex = languageId.IndexOf(oldSubmission["language"].ToString());
                 }
                 else
                 {
@@ -164,7 +164,7 @@ public partial class _Challange : System.Web.UI.Page
                         SubmissionDataSource.UpdateParameters.Add("Question", Request.QueryString["p"]);
                         SubmissionDataSource.UpdateParameters.Add("Username", Membership.GetUser().UserName);
                         SubmissionDataSource.UpdateParameters.Add("Date", DateTime.Now.ToString("MM/dd/yyyy HH:mm"));
-                        SubmissionDataSource.UpdateParameters.Add("Language", DropDownLanguage.Items[resultObj["language"] - 1].Text);
+                        SubmissionDataSource.UpdateParameters.Add("Language", DropDownLanguage.SelectedItem.Text);
                         SubmissionDataSource.Update();
                     }
                     else //Insert
@@ -175,7 +175,7 @@ public partial class _Challange : System.Web.UI.Page
                         SubmissionDataSource.InsertParameters.Add("Question", Request.QueryString["p"]);
                         SubmissionDataSource.InsertParameters.Add("Username", Membership.GetUser().UserName);
                         SubmissionDataSource.InsertParameters.Add("Date", DateTime.Now.ToString("MM/dd/yyyy HH:mm"));
-                        SubmissionDataSource.InsertParameters.Add("Language", DropDownLanguage.Items[resultObj["language"] - 1].Text);
+                        SubmissionDataSource.InsertParameters.Add("Language", DropDownLanguage.SelectedItem.Text);
                         SubmissionDataSource.Insert();
                     }
                 }
