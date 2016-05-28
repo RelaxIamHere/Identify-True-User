@@ -39,6 +39,11 @@
                           GROUP BY Username, Language) AS derivedtbl_1 GROUP BY Username 
                           ORDER BY LanguageSimilarity DESC"></asp:SqlDataSource>
 
+<asp:SqlDataSource ID="UnsolvedQuestionSource" runat="server" 
+        ConnectionString="<%$ ConnectionStrings:ApplicationServices %>"  
+        SelectCommand="SELECT Question FROM Map WHERE (Question NOT IN (SELECT Map_1.Question FROM Map AS Map_1 INNER JOIN
+                          Submission ON Submission.Question = Map_1.Question WHERE (Submission.Username = @Username)))"></asp:SqlDataSource>
+
 <body>
 <div id="wrapper">
         <div id="page-wrapper">
@@ -54,6 +59,8 @@
             <asp:Button type="submit" class="btn btn-primary btn-block" ID="QButton" OnClick="QButton_Click"
             runat="server" Text="Get Question"/>
             </div> 
+            <br />
+            <span runat="server" id="warn"></span>
         </div>
         <!-- /#page-wrapper -->
         </div>
