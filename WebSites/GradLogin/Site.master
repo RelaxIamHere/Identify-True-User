@@ -104,7 +104,10 @@
                             <!-- /.nav-second-level -->
                         </li>
                         <li>
-                            <a href="Compiler.aspx"><i class="fa fa-clock-o fa-fw"></i> Compiler</a>
+                            <a href="Contest.aspx"><i class="fa fa-clock-o fa-fw"></i> Contest</a>
+                        </li>
+                        <li>
+                            <a href="Compiler.aspx"><i class="fa fa-code fa-fw"></i> Compiler</a>
                         </li>
                          <li>
                             <a href="Leaderboard.aspx"><i class="fa fa-trophy fa-fw"></i> Leaderboard</a>
