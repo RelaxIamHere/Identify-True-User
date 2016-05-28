@@ -50,17 +50,21 @@
             <div class="row">
                 <div class="col-lg-12" style="width:75%; float:left">
                     <h1 class="page-header">Contest</h1>
+                    <p>In this section, you will encounter the questions that have been solved by the most similar user to you according to the your experiences on questions by using customized similarity algorithms.</p>
+                    <br />
+                    <center><div style="width:200px;">
+                    <asp:Button type="submit" class="btn btn-primary btn-block" ID="QButton" OnClick="QButton_Click"
+                    runat="server" Text="See the Question"/>
+                    </div> 
+                    <br />
+                    <span runat="server" id="warn"></span></center>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
             <!-- /.row -->
             <br />
-            <div style="width:15%; float:left;">
-            <asp:Button type="submit" class="btn btn-primary btn-block" ID="QButton" OnClick="QButton_Click"
-            runat="server" Text="Get Question"/>
-            </div> 
-            <br />
-            <span runat="server" id="warn"></span>
+
+            
         </div>
         <!-- /#page-wrapper -->
         </div>
