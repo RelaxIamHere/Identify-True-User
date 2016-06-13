@@ -419,8 +419,8 @@
         });
         
         $("#page-wrapper").resize(function (e) {
-            var x = $("#referance").position().top - $("#resize").position().top;
-            $("#resize").height(x-50);
+            //var x = $("#referance").position().top - $("#resize").position().top;
+            //$("#resize").height(x-50);
             if ($("#page-wrapper").width() < 950)
                 document.getElementById("hide").style.display = "none";
             else
