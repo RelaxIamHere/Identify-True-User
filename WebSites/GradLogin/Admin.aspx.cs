@@ -28,12 +28,6 @@ public partial class _Admin : System.Web.UI.Page
             textQcategory.Value=dropdownCategory.Value;
         }
 
-        QuestionDataSource.SelectParameters.Clear();
-        QuestionDataSource.SelectParameters.Add("Category", dropdownCategory.Value);
-        QuestionDataSource.SelectParameters.Add("QuestionName", "%"+search.Value+"%");
-        ListView1.DataSource = QuestionDataSource;
-        ListView1.DataBind();
-
         string ctrlName = Page.Request.Params.Get("__EVENTTARGET");
         if (!String.IsNullOrEmpty(ctrlName) && ctrlName == "dropdownSize")
             DataPager1.PageSize = Convert.ToInt32(dropdownSize.Value);
@@ -69,6 +63,12 @@ public partial class _Admin : System.Web.UI.Page
                 dropdownCategory.Items.RemoveAt(dropdownCategory.SelectedIndex);
             ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "DoPostBack", "__doPostBack('dropdownCategory','')", true);
         }
+
+        QuestionDataSource.SelectParameters.Clear();
+        QuestionDataSource.SelectParameters.Add("Category", dropdownCategory.Value);
+        QuestionDataSource.SelectParameters.Add("QuestionName", "%" + search.Value + "%");
+        ListView1.DataSource = QuestionDataSource;
+        ListView1.DataBind();
 
         int CurrentPage = ((DataPager1.StartRowIndex) / DataPager1.MaximumRows) + 1;
         recordCount.InnerHtml = "Showing " + (DataPager1.StartRowIndex+1) + " to " + (DataPager1.StartRowIndex + DataPager1.PageSize) + " of " + DataPager1.TotalRowCount + " entries";

@@ -45,13 +45,14 @@ public partial class _Leaderboard : System.Web.UI.Page
                     "WHERE a.Username LIKE @Username";
             LeaderDataSource.SelectParameters.Add("Question", Request.QueryString["p"]);
         }
-        LeaderDataSource.SelectParameters.Add("Username", "%"+search.Value+"%");
-        ListView1.DataSource = LeaderDataSource;
-        ListView1.DataBind();
-
+    
         string ctrlName = Page.Request.Params.Get("__EVENTTARGET");
         if (!String.IsNullOrEmpty(ctrlName) && ctrlName == "dropdownSize")
             DataPager1.PageSize = Convert.ToInt32(dropdownSize.Value);
+
+        LeaderDataSource.SelectParameters.Add("Username", "%" + search.Value + "%");
+        ListView1.DataSource = LeaderDataSource;
+        ListView1.DataBind();
 
         int CurrentPage = ((DataPager1.StartRowIndex) / DataPager1.MaximumRows) + 1;
         recordCount.InnerHtml = "Showing " + (DataPager1.StartRowIndex+1) + " to " + (DataPager1.StartRowIndex + DataPager1.PageSize) + " of " + DataPager1.TotalRowCount + " entries";
