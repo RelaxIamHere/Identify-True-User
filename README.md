@@ -1,6 +1,6 @@
 # Identify-True-User
 
-[bee.somee.com](bee.somee.com)
+[bee.somee.com](http://bee.somee.com)
 
 ITU Computer Engineering Graduation Project - Competition platform that allows to contest among the developers with suggestion algorithm implementation
 
