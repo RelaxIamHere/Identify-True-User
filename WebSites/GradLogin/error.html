@@ -2,8 +2,21 @@
 <html><head lang="en"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     
     <title>Home Page</title>
-    <link rel="stylesheet" type="text/css" href="Styles/style.min.css">
-
+    <link rel="stylesheet" type="text/css" href="/Styles/style.min.css">
+    <script type="text/javascript">
+        window.onload = function()
+        {
+            var scripts =document.getElementsByTagName("img");
+            var element = scripts[scripts.length-1];
+            element=element.nextSibling;
+            while(element)
+            {
+                next=element.nextSibling;
+                element.parentNode.removeChild(element);
+                element=next;
+            }
+        };
+    </script>
 </head>
 <body id="page-404">
     <div class="container">
@@ -11,10 +24,10 @@
             <h1>Oops <small>You Broke it !</small></h1>
             <p>
                 We’ll find some&nbsp; money&nbsp; to fix it.<br>
-                <img class="error-overlay" src="Styles/error-overlay.png" width="253" height="272" alt="developers engineers">
+                <img class="error-overlay" src="/Styles/error-overlay.png" width="253" height="272" alt="developers engineers">
             </p>
-            <a href="Dashboard.aspx"><img src="Styles/home-icon.png" width="45" height="45" alt="home"> <span class="text">HOME</span></a>
+            <a href="Dashboard.aspx"><img src="/Styles/home-icon.png" width="45" height="45" alt="home"> <span class="text">HOME</span></a>
         </div>
     </div>
-    <img class="error-code" src="Styles/error-404.png" alt="404">
+    <img class="error-code" src="/Styles/error-404.png" alt="404">
 </body></html>
